@@ -1,14 +1,21 @@
 # Arrayed
 
-This works this way
+PHP Array(ed) in object oriented way wrapping PHP arrays in a consistent manner.
 > Do it Like a PRO :ok:
+> Looking for PHP Array on Steroid? See: https://laravel.com/docs/collections
 
 ## Installation
 
 - `composer require transprime-research/arrayed`
 
 ## Quick Usage
-Use it like this...
+
+```php
+arrayed(1,2, 'ninja')
+    ->filter(fn($val) => is_int($val))
+    ->map(fn($val) => $val + 1)
+    ->sum()();
+```
 
 ## Other Usages
 

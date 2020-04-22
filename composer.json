@@ -1,6 +1,6 @@
 {
   "name": "transprime-research/piper",
-  "description": "PHP Arrayed - Array as an object",
+  "description": "PHP Array(ed) in object oriented way wrapping PHP arrays in a consistent manner.",
   "license": "MIT",
   "keywords": [
     "Piper",
