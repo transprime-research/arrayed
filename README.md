@@ -2,6 +2,7 @@
 
 PHP Array(ed) in object oriented way wrapping PHP arrays in a consistent manner.
 > Do it Like a PRO :ok:
+
 > Looking for PHP Array on Steroid? See: https://laravel.com/docs/collections
 
 ## Installation
