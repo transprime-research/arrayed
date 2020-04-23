@@ -62,28 +62,28 @@ class Arrayed implements \ArrayAccess, \Countable, \IteratorAggregate
         return $this;
     }
 
-    public function flip()
+    public function flip(): Arrayed
     {
         $this->lastResult = array_flip($this->getWorkableItem());
 
         return $this;
     }
 
-    public function intersect(array $array2, ...$_)
+    public function intersect(array $array2, ...$_): Arrayed
     {
         $this->lastResult = array_intersect($this->getWorkableItem(), $array2, ...$_);
 
         return $this;
     }
 
-    public function values()
+    public function values(): Arrayed
     {
         $this->lastResult = array_values($this->getWorkableItem());
 
         return $this;
     }
 
-    public function keys($overwrite = true)
+    public function keys($overwrite = true): Arrayed
     {
         $keys = array_keys($this->getWorkableItem());
 
@@ -101,12 +101,12 @@ class Arrayed implements \ArrayAccess, \Countable, \IteratorAggregate
         return $this->makeArrayed($this->getWorkableItem()[$offset]);
     }
 
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): Arrayed
     {
         return $this->merge([$offset => $value]);
     }
 
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): Arrayed
     {
         $item = $this->getWorkableItem();
 
@@ -119,11 +119,9 @@ class Arrayed implements \ArrayAccess, \Countable, \IteratorAggregate
 
     //Scalar returns
 
-    public function sum()
+    public function sum():int
     {
-        $this->lastResult = array_sum($this->getWorkableItem());
-
-        return $this->lastResult;
+        return array_sum($this->getWorkableItem());
     }
 
     public function inArray($needle, bool $strict = false): bool
