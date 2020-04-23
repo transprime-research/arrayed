@@ -83,6 +83,22 @@ class ArrayedTest extends TestCase
         );
     }
 
+    public function testMergeMethod()
+    {
+        $this->assertCount(
+           4,
+            arrayed(['a' => 1, 'b' => 2])
+                ->merge(['z' => 26])
+                ->merge(['c' => 2])()
+        );
+
+        $this->assertCount(
+           4,
+            arrayed(['a' => 1, 'b' => 2])
+                ->merge(['z' => 26],['c' => 2])()
+        );
+    }
+
     // Future possibility
     //            arrayed(\arrayed(1)(), \arrayed(2)())->map(fn($i) => $i[0]+1)->sum()->done()
 }
