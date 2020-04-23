@@ -2,10 +2,10 @@
 
 namespace Transprime\Arrayed;
 
-use Transprime\Arrayed\Exceptions\ArrayedException;
+use ArrayIterator;
 use Transprime\Arrayed\Types\Undefined;
 
-class Arrayed
+class Arrayed implements \ArrayAccess, \Countable, \IteratorAggregate
 {
     private array $values;
 
@@ -13,7 +13,6 @@ class Arrayed
 
     public function __construct(...$values)
     {
-
         if (func_num_args() === 1 && is_array($values[0])) {
             $this->values = $values[0];
         } else {
@@ -25,7 +24,7 @@ class Arrayed
 
     public function __invoke(callable $callable = null)
     {
-        return $this->done($callable);
+        return $this->result($callable);
     }
 
     public function map($callback): Arrayed
@@ -49,24 +48,89 @@ class Arrayed
         return $this;
     }
 
-    public function sum(): Arrayed
+    public function offsetGet($offset)
     {
-        $this->lastResult = array_sum($this->getWorkableItem());
+        return $this->makeArrayed($this->getWorkableItem()[$offset]);
+    }
+
+    public function merge(array $array2 = null, ...$_)
+    {
+        $this->lastResult = array_merge($this->getWorkableItem(), $array2, ...$_);
 
         return $this;
     }
 
-    public function done(callable $callable = null)
+    public function offsetSet($offset, $value)
+    {
+        return $this->merge([$offset => $value]);
+    }
+
+    public function offsetUnset($offset)
+    {
+        unset($this->getWorkableItem()[$offset]);
+
+        return $this;
+    }
+
+    public function sum()
+    {
+        $this->lastResult = array_sum($this->getWorkableItem());
+
+        return $this->lastResult;
+    }
+
+    public function inArray($needle, bool $strict = false): bool
+    {
+        return in_array($this->getWorkableItem(), $needle, $strict);
+    }
+
+    public function isArray(): bool
+    {
+        return is_array($this->getWorkableItem());
+    }
+
+    public function keyExists($key): bool
+    {
+        return array_key_exists($key, $this->getWorkableItem());
+    }
+
+    public function offsetExists($offset): bool
+    {
+        return $this->keyExists($offset);
+    }
+
+    public function result(callable $callable = null)
     {
         return $callable ? $callable($this->lastResult) : $this->lastResult;
     }
 
-    private function getWorkableItem()
+    private function getWorkableItem(bool $asArray = false)
     {
         if ($this->lastResult instanceof Undefined) {
             return $this->values;
         }
 
-        return $this->lastResult;
+        return ($asArray && !is_array($this->lastResult)) ? [$this->lastResult] : $this->lastResult;
+    }
+
+    private static function makeArrayed($data)
+    {
+        return is_array($data) ? new static($data) : $data;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function count(): int
+    {
+        return count($this->getWorkableItem());
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getIterator()
+    {
+        return new ArrayIterator($this->getWorkableItem());
     }
 }
