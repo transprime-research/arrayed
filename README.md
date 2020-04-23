@@ -1,6 +1,6 @@
 # Arrayed
 
-PHP Array(ed) in object oriented way wrapping PHP arrays in a consistent manner.
+PHP Array(ed) in object oriented way wrapping [PHP Arrays](https://www.php.net/manual/en/ref.array.php) in a consistent manner.
 > Do it Like a PRO :ok:
 
 > Looking for PHP Array on Steroid? See: https://laravel.com/docs/collections
@@ -15,7 +15,9 @@ PHP Array(ed) in object oriented way wrapping PHP arrays in a consistent manner.
 arrayed(1,2, 'ninja')
     ->filter(fn($val) => is_int($val))
     ->map(fn($val) => $val + 1)
-    ->sum()();
+    ->flip()
+    ->values()
+    ->sum()(); //or ->sum()->result();
 ```
 
 ## Other Usages
