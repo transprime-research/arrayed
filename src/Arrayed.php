@@ -83,6 +83,19 @@ class Arrayed implements \ArrayAccess, \Countable, \IteratorAggregate
         return $this;
     }
 
+    public function keys($overwrite = true)
+    {
+        $keys = array_keys($this->getWorkableItem());
+
+        if (!$overwrite) {
+            return $this->makeArrayed($keys);
+        }
+
+        $this->lastResult = $keys;
+
+        return $this;
+    }
+
     public function offsetGet($offset)
     {
         return $this->makeArrayed($this->getWorkableItem()[$offset]);

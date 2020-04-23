@@ -196,6 +196,13 @@ class ArrayedTest extends TestCase
         );
     }
 
-    // Future possibility
-    //            arrayed(\arrayed(1)(), \arrayed(2)())->map(fn($i) => $i[0]+1)->sum()->done()
+    public function testKeysMethod()
+    {
+        $this->assertEquals(
+            ['z', 'y'],
+            arrayed(['a' => 'z', 'b' => 'y'])
+                ->flip()
+                ->keys()()
+        );
+    }
 }
