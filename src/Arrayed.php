@@ -76,6 +76,13 @@ class Arrayed implements \ArrayAccess, \Countable, \IteratorAggregate
         return $this;
     }
 
+    public function values()
+    {
+        $this->lastResult = array_values($this->getWorkableItem());
+
+        return $this;
+    }
+
     public function offsetGet($offset)
     {
         return $this->makeArrayed($this->getWorkableItem()[$offset]);

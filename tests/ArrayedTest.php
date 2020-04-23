@@ -86,16 +86,16 @@ class ArrayedTest extends TestCase
     public function testMergeMethod()
     {
         $this->assertCount(
-           4,
+            4,
             arrayed(['a' => 1, 'b' => 2])
                 ->merge(['z' => 26])
                 ->merge(['c' => 2])()
         );
 
         $this->assertCount(
-           4,
+            4,
             arrayed(['a' => 1, 'b' => 2])
-                ->merge(['z' => 26],['c' => 2])()
+                ->merge(['z' => 26], ['c' => 2])()
         );
     }
 
@@ -176,6 +176,23 @@ class ArrayedTest extends TestCase
                 ->flip()
                 ->intersect(['a', 0])
                 ->intersect([0])
+        );
+    }
+
+    public function testValuesMethod()
+    {
+        $this->assertEquals(
+            ['a', 'b'],
+            arrayed(['a' => 'z', 'b' => 'y'])
+                ->flip()
+                ->values()()
+        );
+
+        $this->assertSameSize(
+            ['a', 'b'],
+            arrayed(['a' => 'z', 'b' => 'y'])
+                ->flip()
+                ->values()
         );
     }
 
