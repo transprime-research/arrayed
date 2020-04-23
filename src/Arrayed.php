@@ -34,9 +34,13 @@ class Arrayed implements \ArrayAccess, \Countable, \IteratorAggregate
         return $this;
     }
 
-    public function filter(callable $callback = null, $flag = 0): Arrayed
+    public function filter($callback = null, int $flag = 0): Arrayed
     {
-        $this->lastResult = array_filter($this->getWorkableItem(), $callback, $flag);
+        if ($callback) {
+            $this->lastResult = array_filter($this->getWorkableItem(), $callback, $flag);
+        } else {
+            $this->lastResult = array_filter($this->getWorkableItem());
+        }
 
         return $this;
     }
@@ -119,14 +123,14 @@ class Arrayed implements \ArrayAccess, \Countable, \IteratorAggregate
 
     //Scalar returns
 
-    public function sum():int
+    public function sum(): int
     {
         return array_sum($this->getWorkableItem());
     }
 
-    public function inArray($needle, bool $strict = false): bool
+    public function contains($needle, bool $strict = false): bool
     {
-        return in_array($this->getWorkableItem(), $needle, $strict);
+        return in_array($needle, $this->getWorkableItem(), $strict);
     }
 
     public function isArray(): bool
