@@ -19,7 +19,7 @@ class Arrayed implements \ArrayAccess, \Countable, \IteratorAggregate
             $this->values = $values;
         }
 
-        $this->lastResult = new Undefined();
+        $this->setLastResult(new Undefined());
     }
 
     public function __invoke(callable $callable = null)
@@ -29,62 +29,46 @@ class Arrayed implements \ArrayAccess, \Countable, \IteratorAggregate
 
     public function map($callback): Arrayed
     {
-        $this->lastResult = array_map($callback, $this->getWorkableItem());
-
-        return $this;
+        return $this->setLastResult(array_map($callback, $this->getWorkableItem()));
     }
 
     public function filter($callback = null, int $flag = 0): Arrayed
     {
         if ($callback) {
-            $this->lastResult = array_filter($this->getWorkableItem(), $callback, $flag);
-        } else {
-            $this->lastResult = array_filter($this->getWorkableItem());
+            return $this->setLastResult(array_filter($this->getWorkableItem(), $callback, $flag));
         }
 
-        return $this;
+        return $this->setLastResult(array_filter($this->getWorkableItem()));
     }
 
     public function reduce($function, $initial = null): Arrayed
     {
-        $this->lastResult = array_reduce($this->getWorkableItem(), $function, $initial);
-
-        return $this;
+        return $this->setLastResult(array_reduce($this->getWorkableItem(), $function, $initial));
     }
 
     public function merge(array $array2 = null, ...$_): Arrayed
     {
-        $this->lastResult = array_merge($this->getWorkableItem(), $array2, ...$_);
-
-        return $this;
+        return $this->setLastResult(array_merge($this->getWorkableItem(), $array2, ...$_));
     }
 
     public function mergeRecursive(...$_): Arrayed
     {
-        $this->lastResult = array_merge_recursive($this->getWorkableItem(), ...$_);
-
-        return $this;
+        return $this->setLastResult(array_merge_recursive($this->getWorkableItem(), ...$_));
     }
 
     public function flip(): Arrayed
     {
-        $this->lastResult = array_flip($this->getWorkableItem());
-
-        return $this;
+        return $this->setLastResult(array_flip($this->getWorkableItem()));
     }
 
     public function intersect(array $array2, ...$_): Arrayed
     {
-        $this->lastResult = array_intersect($this->getWorkableItem(), $array2, ...$_);
-
-        return $this;
+        return $this->setLastResult(array_intersect($this->getWorkableItem(), $array2, ...$_));
     }
 
     public function values(): Arrayed
     {
-        $this->lastResult = array_values($this->getWorkableItem());
-
-        return $this;
+        return $this->setLastResult(array_values($this->getWorkableItem()));
     }
 
     public function keys($overwrite = true): Arrayed
@@ -95,9 +79,7 @@ class Arrayed implements \ArrayAccess, \Countable, \IteratorAggregate
             return $this->makeArrayed($keys);
         }
 
-        $this->lastResult = $keys;
-
-        return $this;
+        return $this->setLastResult($keys);
     }
 
     public function offsetGet($offset)
@@ -116,9 +98,7 @@ class Arrayed implements \ArrayAccess, \Countable, \IteratorAggregate
 
         unset($item[$offset]);
 
-        $this->lastResult = $item;
-
-        return $this;
+        return $this->setLastResult($item);
     }
 
     //Scalar returns
@@ -163,6 +143,20 @@ class Arrayed implements \ArrayAccess, \Countable, \IteratorAggregate
     public function getIterator()
     {
         return new ArrayIterator($this->getWorkableItem());
+    }
+
+    public function pipe(callable $action, ...$parameters)
+    {
+        return $this->setLastResult(
+            piper($this->getWorkableItem())->to($action, ...$parameters)()
+        );
+    }
+
+    private function setLastResult($value)
+    {
+        $this->lastResult = $value;
+
+        return $this;
     }
 
     public function result(callable $callable = null)
