@@ -3,6 +3,7 @@
 namespace Transprime\Arrayed;
 
 use Transprime\Arrayed\Exceptions\ArrayedException;
+use Transprime\Arrayed\Types\Undefined;
 
 class Arrayed
 {
@@ -13,7 +14,7 @@ class Arrayed
     public function __construct(...$values)
     {
         $this->values = $values;
-        $this->lastResult = new Undefined;
+        $this->lastResult = new Undefined();
     }
 
     public function __invoke(callable $callable = null)
@@ -63,8 +64,3 @@ class Arrayed
         return $this->lastResult;
     }
 }
-
-class Undefined {
-
-}
-
