@@ -13,7 +13,13 @@ class Arrayed
 
     public function __construct(...$values)
     {
-        $this->values = $values;
+
+        if (func_num_args() === 1 && is_array($values[0])) {
+            $this->values = $values[0];
+        } else {
+            $this->values = $values;
+        }
+
         $this->lastResult = new Undefined();
     }
 

@@ -32,7 +32,7 @@ class ArrayedTest extends TestCase
     public function testPassingAnArray()
     {
         $this->assertEquals(
-            7,
+            5,
             arrayed([1, 2, 'ninja'])
                 ->filter(fn($val) => is_int($val))
                 ->map(fn($val) => $val + 1)
