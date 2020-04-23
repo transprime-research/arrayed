@@ -62,6 +62,13 @@ class Arrayed implements \ArrayAccess, \Countable, \IteratorAggregate
         return $this;
     }
 
+    public function flip()
+    {
+        $this->lastResult = array_flip($this->getWorkableItem());
+
+        return $this;
+    }
+
     public function offsetGet($offset)
     {
         return $this->makeArrayed($this->getWorkableItem()[$offset]);

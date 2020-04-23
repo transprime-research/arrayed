@@ -138,6 +138,16 @@ class ArrayedTest extends TestCase
         );
     }
 
+    public function testFlipMethod()
+    {
+        $this->assertEquals(
+            'b',
+            arrayed(['a' => 1, 'b' => 2])
+                ->flip()
+                ->offsetGet(2) //b
+        );
+    }
+
     // Future possibility
     //            arrayed(\arrayed(1)(), \arrayed(2)())->map(fn($i) => $i[0]+1)->sum()->done()
 }
