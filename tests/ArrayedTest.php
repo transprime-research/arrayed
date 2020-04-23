@@ -148,6 +148,37 @@ class ArrayedTest extends TestCase
         );
     }
 
+    public function testIntersectMethod()
+    {
+        $this->assertCount(
+            1,
+            arrayed(['a' => 'z', 'b' => 'y'])
+                ->flip()
+                ->intersect(['z' => 'a'])
+        );
+
+        $this->assertCount(
+            2,
+            arrayed(['a' => 'z', 'b' => 'y', 'c'])
+                ->intersect(arrayed(['a' => 'z', 'c', 'm'])())
+        );
+
+        $this->assertCount(
+            1,
+            arrayed(['a' => 'z', 'b' => 'y', 'c'])
+                ->flip()
+                ->intersect(['a', 0], [0])
+        );
+
+        $this->assertCount(
+            1,
+            arrayed(['a' => 'z', 'b' => 'y', 'c'])
+                ->flip()
+                ->intersect(['a', 0])
+                ->intersect([0])
+        );
+    }
+
     // Future possibility
     //            arrayed(\arrayed(1)(), \arrayed(2)())->map(fn($i) => $i[0]+1)->sum()->done()
 }

@@ -69,6 +69,13 @@ class Arrayed implements \ArrayAccess, \Countable, \IteratorAggregate
         return $this;
     }
 
+    public function intersect(array $array2, ...$_)
+    {
+        $this->lastResult = array_intersect($this->getWorkableItem(), $array2, ...$_);
+
+        return $this;
+    }
+
     public function offsetGet($offset)
     {
         return $this->makeArrayed($this->getWorkableItem()[$offset]);
