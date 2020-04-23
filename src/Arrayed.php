@@ -103,6 +103,11 @@ class Arrayed implements \ArrayAccess, \Countable, \IteratorAggregate
         return $this->keyExists($offset);
     }
 
+    public function empty(): bool
+    {
+        return empty($this->getWorkableItem());
+    }
+
     public function count(): int
     {
         return count($this->getWorkableItem());

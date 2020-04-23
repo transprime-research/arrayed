@@ -99,6 +99,23 @@ class ArrayedTest extends TestCase
         );
     }
 
+    public function testAccessibleArray()
+    {
+        $this->assertCount(
+            2,
+            arrayed(['a' => 1, 'b' => 2])
+        );
+
+        $this->assertEquals(
+            2,
+            arrayed(['a' => 1, 'b' => 2])['b']
+        );
+
+        $this->assertTrue(
+            arrayed([])->empty()
+        );
+    }
+
     // Future possibility
     //            arrayed(\arrayed(1)(), \arrayed(2)())->map(fn($i) => $i[0]+1)->sum()->done()
 }
