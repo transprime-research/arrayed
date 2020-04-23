@@ -67,7 +67,11 @@ class Arrayed implements \ArrayAccess, \Countable, \IteratorAggregate
 
     public function offsetUnset($offset)
     {
-        unset($this->getWorkableItem()[$offset]);
+        $item = $this->getWorkableItem();
+
+        unset($item[$offset]);
+
+        $this->lastResult = $item;
 
         return $this;
     }
@@ -99,9 +103,19 @@ class Arrayed implements \ArrayAccess, \Countable, \IteratorAggregate
         return $this->keyExists($offset);
     }
 
+    public function count(): int
+    {
+        return count($this->getWorkableItem());
+    }
+
+    public function getIterator()
+    {
+        return new ArrayIterator($this->getWorkableItem());
+    }
+
     public function result(callable $callable = null)
     {
-        return $callable ? $callable($this->lastResult) : $this->lastResult;
+        return $callable ? $callable($this->lastResult) : $this->getWorkableItem();
     }
 
     private function getWorkableItem(bool $asArray = false)
@@ -116,21 +130,5 @@ class Arrayed implements \ArrayAccess, \Countable, \IteratorAggregate
     private static function makeArrayed($data)
     {
         return is_array($data) ? new static($data) : $data;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function count(): int
-    {
-        return count($this->getWorkableItem());
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getIterator()
-    {
-        return new ArrayIterator($this->getWorkableItem());
     }
 }
