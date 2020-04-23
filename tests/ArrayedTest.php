@@ -233,4 +233,22 @@ class ArrayedTest extends TestCase
                 ->sum()
         );
     }
+
+    public function testWithPiper()
+    {
+        $this->assertEquals(
+           ['c' => 'com'],
+            arrayed(['a' => 'www', 'b' => 'dot'])
+                ->flip()
+                ->pipe('array_diff', ['www' => 'a', 'c' => 'com'])()
+        );
+
+        $this->assertEquals(
+           ['com' => 1],
+            arrayed(['a' => 'www', 'b' => 'dot'])
+                ->flip()
+                ->pipe('array_diff', ['www' => 'a', 'c' => 'com'])
+                ->pipe('array_count_values')()
+        );
+    }
 }
