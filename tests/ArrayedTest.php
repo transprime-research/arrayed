@@ -116,7 +116,7 @@ class ArrayedTest extends TestCase
             [...arrayed([1, 2])]
         );
 
-        [$a, ] = arrayed([1, 2]);
+        [$a,] = arrayed([1, 2]);
         $this->assertEquals(
             1,
             $a
@@ -203,6 +203,16 @@ class ArrayedTest extends TestCase
             arrayed(['a' => 'z', 'b' => 'y'])
                 ->flip()
                 ->keys()()
+        );
+    }
+
+    public function testUsingArrayedAsConstructorValues()
+    {
+        $this->assertEquals(
+            5,
+            arrayed(\arrayed(1), \arrayed(2))
+                ->map(fn($i) => $i[0] + 1)
+                ->sum()
         );
     }
 }
