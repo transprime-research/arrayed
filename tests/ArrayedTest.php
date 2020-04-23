@@ -237,14 +237,14 @@ class ArrayedTest extends TestCase
     public function testWithPiper()
     {
         $this->assertEquals(
-           ['c' => 'com'],
+            ['c' => 'com'],
             arrayed(['a' => 'www', 'b' => 'dot'])
                 ->flip()
                 ->pipe('array_diff', ['www' => 'a', 'c' => 'com'])()
         );
 
         $this->assertEquals(
-           ['com' => 1],
+            ['com' => 1],
             arrayed(['a' => 'www', 'b' => 'dot'])
                 ->flip()
                 ->pipe('array_diff', ['www' => 'a', 'c' => 'com'])
@@ -252,7 +252,7 @@ class ArrayedTest extends TestCase
         );
 
         $this->assertEquals(
-           ['a', 'b'],
+            ['a', 'b'],
             arrayed(['a' => 'www', 'b' => 'dot', 'c' => 'www'])
                 ->pipe('array_unique')
                 ->flip()
