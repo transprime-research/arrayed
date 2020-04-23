@@ -250,5 +250,13 @@ class ArrayedTest extends TestCase
                 ->pipe('array_diff', ['www' => 'a', 'c' => 'com'])
                 ->pipe('array_count_values')()
         );
+
+        $this->assertEquals(
+           ['a', 'b'],
+            arrayed(['a' => 'www', 'b' => 'dot', 'c' => 'www'])
+                ->pipe('array_unique')
+                ->flip()
+                ->values()()
+        );
     }
 }
