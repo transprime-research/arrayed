@@ -127,6 +127,17 @@ class ArrayedTest extends TestCase
         );
     }
 
+    public function testMergeRecursiveMethod()
+    {
+        $this->assertCount(
+            2,
+            arrayed(['a' => 1, 'b' => 2])
+                ->merge(['b' => 4])
+                ->mergeRecursive(['b' => 5])
+                ->offsetGet('b') //[4, 5]]
+        );
+    }
+
     // Future possibility
     //            arrayed(\arrayed(1)(), \arrayed(2)())->map(fn($i) => $i[0]+1)->sum()->done()
 }

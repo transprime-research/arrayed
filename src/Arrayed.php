@@ -48,16 +48,23 @@ class Arrayed implements \ArrayAccess, \Countable, \IteratorAggregate
         return $this;
     }
 
-    public function offsetGet($offset)
-    {
-        return $this->makeArrayed($this->getWorkableItem()[$offset]);
-    }
-
-    public function merge(array $array2 = null, ...$_)
+    public function merge(array $array2 = null, ...$_): Arrayed
     {
         $this->lastResult = array_merge($this->getWorkableItem(), $array2, ...$_);
 
         return $this;
+    }
+
+    public function mergeRecursive(...$_): Arrayed
+    {
+        $this->lastResult = array_merge_recursive($this->getWorkableItem(), ...$_);
+
+        return $this;
+    }
+
+    public function offsetGet($offset)
+    {
+        return $this->makeArrayed($this->getWorkableItem()[$offset]);
     }
 
     public function offsetSet($offset, $value)
@@ -75,6 +82,8 @@ class Arrayed implements \ArrayAccess, \Countable, \IteratorAggregate
 
         return $this;
     }
+
+    //Scalar returns
 
     public function sum()
     {
@@ -112,6 +121,8 @@ class Arrayed implements \ArrayAccess, \Countable, \IteratorAggregate
     {
         return count($this->getWorkableItem());
     }
+
+    //Getters to end chained calls
 
     public function getIterator()
     {
