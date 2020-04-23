@@ -50,6 +50,39 @@ class ArrayedTest extends TestCase
         );
     }
 
+    public function testOffsetMethods()
+    {
+        $this->assertEquals(
+            1,
+            arrayed(['a' => 1, 'b' => 2])
+                ->offsetGet('a')
+        );
+
+        $this->assertEquals(
+            ['z' => 1],
+            arrayed(['a' => ['z' => 1], 'b' => 2])
+                ->offsetGet('a')()
+        );
+
+        $this->assertTrue(
+            arrayed(['a' => ['z' => 1], 'b' => 2])
+                ->offsetExists('b')
+        );
+
+        $this->assertEquals(
+            3,
+            arrayed(['a' => ['z' => 1], 'b' => 2])
+                ->offsetSet('c', 3)
+                ->count()
+        );
+
+        $this->assertEquals(
+            ['b' => 2],
+            arrayed(['a' => ['z' => 1], 'b' => 2])
+                ->offsetUnset('a')()
+        );
+    }
+
     // Future possibility
     //            arrayed(\arrayed(1)(), \arrayed(2)())->map(fn($i) => $i[0]+1)->sum()->done()
 }
