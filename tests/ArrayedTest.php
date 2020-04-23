@@ -206,6 +206,24 @@ class ArrayedTest extends TestCase
         );
     }
 
+    public function testContainsMethod()
+    {
+        $this->assertTrue(
+            arrayed(['a' => 'z', 'b' => 'y'])
+                ->contains('y')
+        );
+
+        $this->assertTrue(
+            arrayed(['a' => 'www', 'b' => 'dot', 'c' => null])
+                ->contains('')
+        );
+
+        $this->assertFalse(
+            arrayed(['a' => 'www', 'b' => 'dot', 'c' => null])
+                ->contains('', true)
+        );
+    }
+
     public function testUsingArrayedAsConstructorValues()
     {
         $this->assertEquals(
