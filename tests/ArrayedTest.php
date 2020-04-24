@@ -19,6 +19,15 @@ class ArrayedTest extends TestCase
         $this->assertInstanceOf(ArrayedInterface::class, Arrayed::on());
     }
 
+    public function testInitialDataIsCorrectlyRetrieved()
+    {
+        $data = ['1', 2];
+        $data2 = ['1', 2];
+
+        $this->assertSame(arrayed($data)->keys()->initial(), $data);
+        $this->assertSame(arrayed(...$data2)->keys()->initial(), $data2);
+    }
+
     public function testSum()
     {
         $this->assertEquals(3, arrayed(1, 2)->sum());

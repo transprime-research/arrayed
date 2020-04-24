@@ -37,6 +37,12 @@ Arrayed::on(1, 2)->count();
 (new Arrayed(1,2))->count();
 ```
 
+Get the original array data with `initial()` method
+
+```php
+arrayed([1, 2])->flip()->initial(); //returns [1, 2]
+```
+
 As at now not all `array_*` functions have been implemented.
 `pipe()` method helps to call custom function on the array result.
 
@@ -62,6 +68,8 @@ arrayed(['a' => 'www', 'b' => 'dot', 'c' => 'www'])
 These are the API's available
 
 ```php
+static Arrayed::on(...$values): ArrayedInterface;
+
 Arrayed::map($callback): ArrayedInterface;
 
 Arrayed::filter($callback = null, int $flag = 0): ArrayedInterface;
@@ -105,6 +113,8 @@ Arrayed::getIterator();
 Arrayed::pipe(callable $action, ...$parameters);
 
 Arrayed::result(callable $callable = null);
+
+Arrayed::initial(): array;
 ```
 
 ## Additional Information

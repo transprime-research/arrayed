@@ -183,4 +183,9 @@ class Arrayed implements ArrayedInterface
     {
         return is_array($data) ? new static($data) : $data;
     }
+
+    public function initial(): array
+    {
+        return $this->values;
+    }
 }

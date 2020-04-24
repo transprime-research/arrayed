@@ -53,4 +53,6 @@ interface ArrayedInterface extends ArrayAccess, Countable, IteratorAggregate
     public function pipe(callable $action, ...$parameters);
 
     public function result(callable $callable = null);
+
+    public function initial(): array;
 }
