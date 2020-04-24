@@ -39,7 +39,42 @@ Arrayed::on(1, 2)->count();
 (new Arrayed(1,2))->count();
 ```
 
-If any operation normally returns an array, the return value will give `Arrayed` instance so that other methods can be chained on them otherwise a non-array value is returned as can be seen above that `count()` returns an integer.
+Initial values can be passed in two ways:
+
+```php
+//Non associative
+arrayed(1, 2);
+
+//OR
+arrayed([1, 2]);
+
+// For associative array, only this way
+arrayed(['a' => 1, 'b' => 2]); 
+```
+
+#### With Laravel & Laravel Collection
+
+Laravel Collections
+
+```php
+collect(arrayed(1, 2, 3, 4));
+
+// Or
+new Collection(arrayed(1, 2, 3, 4));
+
+// Or
+Collection::make(arrayed(1, 2, 3, 4));
+```
+
+Laravel Response accepts `Arrayed`:
+
+```php
+response()->json(arrayed(1, 2, 3)->flip());
+```
+
+## Others
+
+If any operation normally returns an array, the return value will give `Arrayed` instance so that other methods can be chained on them otherwise a non-array value is returned as can be seen above that `sum()` returns an integer in the example below:
 
 Example:
 
@@ -54,18 +89,18 @@ You can still work on the result (if its an array'ed value) by passing a closure
 ```php
 arrayed(['a' => 'name', 'b' => 'age'])
     ->values()
-    ->result(fn($val) => implode(',', $val)); //returns 'name,age'
+    ->result(fn($val) => implode(',', $val)); //'name,age'
 
 //Or
 
 arrayed(['a' => 'name', 'b' => 'age'])
-    ->values()(fn($val) => implode(',', $val)); //returns 'name,age'
+    ->values()(fn($val) => implode(',', $val)); //'name,age'
 ```
 
 Get the original array data with `initial()` method
 
 ```php
-arrayed([1, 2])->flip()->initial(); //returns [1, 2]
+arrayed([1, 2])->flip()->initial(); //[1, 2]
 ```
 
 As at now not all `array_*` functions have been implemented.
@@ -77,7 +112,7 @@ Such as `array_unique` used in this way:
 arrayed(['a' => 'www', 'b' => 'dot', 'c' => 'www'])
     ->pipe('array_unique') // data is piped forward to `array_unique`
     ->flip()
-    ->values()(); //returns ['a', 'b']
+    ->values()(); //['a', 'b']
 ```
 > The pipe method makes use of [Piper](https://github.com/transprime-research/piper) - A PHP functional pipe'ing
 > See `\Transprime\Arrayed\Tests\ArrayedTest` 
@@ -85,7 +120,6 @@ arrayed(['a' => 'www', 'b' => 'dot', 'c' => 'www'])
 ## Coming Soon
 
 - Implement other `array_*` methods
-- Integrate with [Laravel Collections](https://laravel.com/docs/collections) i.e `collect(arrayed(1, 2, 3))->sum()`
 
 > Api implementation to be decided
 
@@ -134,13 +168,13 @@ Arrayed::empty(): bool;
 
 Arrayed::count(): int;
 
-Arrayed::getIterator();
-
 Arrayed::pipe(callable $action, ...$parameters);
 
 Arrayed::result(callable $callable = null);
 
 Arrayed::initial(): array;
+
+Arrayed::__toString(): string; // returns string rep of the array
 ```
 
 ## Additional Information

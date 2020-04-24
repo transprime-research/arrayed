@@ -176,7 +176,7 @@ class Arrayed implements ArrayedInterface
             return $this->values;
         }
 
-        return ($asArray && !is_array($this->lastResult)) ? [$this->lastResult] : $this->lastResult;
+        return ($asArray && !is_array($this->lastResult)) ? (array)$this->lastResult : $this->lastResult;
     }
 
     private static function makeArrayed($data)
@@ -187,5 +187,18 @@ class Arrayed implements ArrayedInterface
     public function initial(): array
     {
         return $this->values;
+    }
+
+    public function __toString(): string
+    {
+        return json_encode($this->getWorkableItem(true));
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function jsonSerialize()
+    {
+       return $this->getWorkableItem(true);
     }
 }
