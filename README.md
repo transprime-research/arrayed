@@ -1,13 +1,15 @@
 # Arrayed
 
-PHP Array(ed) in object oriented way wrapping [PHP Arrays](https://www.php.net/manual/en/ref.array.php) in a consistent manner.
-> Do it Like a PRO :ok:
+Simple PHP Array(ed) in object oriented way wrapping [PHP Arrays](https://www.php.net/manual/en/ref.array.php) in a consistent manner.
+> No advanced stuff, just wrap PHP array_* functions and a little more. Do it Like a PRO :ok:
 
 > Looking for PHP Array on Steroid? See: https://laravel.com/docs/collections
 
 ## Installation
 
-- `composer require transprime-research/arrayed`
+```shell script
+composer require transprime-research/arrayed
+```
 
 ## Quick Usage
 
@@ -17,7 +19,7 @@ arrayed(1, 2, 'ninja')
     ->map(fn($val) => $val + 1)
     ->flip()
     ->values()
-    ->sum()(); //or ->sum()->result();
+    ->sum()(); //use () or ->result() at the end;
 ```
 
 ## Other Usages
@@ -35,6 +37,29 @@ Arrayed::on(1, 2)->count();
 
 // Normal with (new instance)
 (new Arrayed(1,2))->count();
+```
+
+If any operation normally returns an array, the return value will give `Arrayed` instance so that other methods can be chained on them otherwise a non-array value is returned as can be seen above that `count()` returns an integer.
+
+Example:
+
+```php
+arrayed(['a' => 1, 'b' => 2])
+    ->values() // returns array, we can chain
+    ->sum(); // returns an integer, we cannot chain
+```
+
+You can still work on the result (if its an array'ed value) by passing a closure/callable function to `result()` method:
+
+```php
+arrayed(['a' => 'name', 'b' => 'age'])
+    ->values()
+    ->result(fn($val) => implode(',', $val)); //returns 'name,age'
+
+//Or
+
+arrayed(['a' => 'name', 'b' => 'age'])
+    ->values()(fn($val) => implode(',', $val)); //returns 'name,age'
 ```
 
 Get the original array data with `initial()` method
@@ -132,6 +157,12 @@ See other packages in this series here:
 
 ## Similar packages
 
+- https://github.com/bocharsky-bw/Arrayzy - Identical but with more actions and features
+- https://github.com/voku/Arrayy - Perform more than just an OOP style on Arrays
+- https://github.com/dantodev/php-array-tools - array tools plus collections
+- https://github.com/minwork/array - Pack of advanced PHP array functions
+- https://github.com/mblarsen/arrgh - A Sane PHP Array library with advance functions
+- More at: https://www.google.com/search?q=php+array+github
 
 ## Licence
 
