@@ -3,13 +3,29 @@
 namespace Piper\Tests;
 
 use PHPUnit\Framework\TestCase;
-use Transprime\Arrayed\{Arrayed, Exceptions\ArrayedException};
+use Transprime\Arrayed\{Arrayed, Interfaces\ArrayedInterface};
 
 class ArrayedTest extends TestCase
 {
     public function testArrayedIsCreated()
     {
         $this->assertIsObject(new Arrayed());
+    }
+
+    public function testIsArrayed()
+    {
+        $this->assertInstanceOf(ArrayedInterface::class, new Arrayed());
+        $this->assertInstanceOf(ArrayedInterface::class, arrayed());
+        $this->assertInstanceOf(ArrayedInterface::class, Arrayed::on());
+    }
+
+    public function testInitialDataIsCorrectlyRetrieved()
+    {
+        $data = ['1', 2];
+        $data2 = ['1', 2];
+
+        $this->assertSame(arrayed($data)->keys()->initial(), $data);
+        $this->assertSame(arrayed(...$data2)->keys()->initial(), $data2);
     }
 
     public function testSum()
@@ -257,6 +273,29 @@ class ArrayedTest extends TestCase
                 ->pipe('array_unique')
                 ->flip()
                 ->values()()
+        );
+    }
+
+    public function testExtraCallableOnResultMethod()
+    {
+        $this->assertEquals(
+            'name,age',
+            arrayed(['a' => 'name', 'b' => 'age'])
+                ->values()
+                ->result(fn($val) => implode(',', $val))
+        );
+
+        $this->assertEquals(
+            'name,age',
+            arrayed(['a' => 'name', 'b' => 'age'])
+                ->values()(fn($val) => implode(',', $val))
+        );
+
+        $this->assertEquals(
+            'nameage',
+            arrayed(['a' => 'name', 'b' => 'age'])
+                ->values()
+                ->result('implode')
         );
     }
 }
