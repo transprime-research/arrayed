@@ -298,4 +298,14 @@ class ArrayedTest extends TestCase
                 ->result('implode')
         );
     }
+
+    public function testJsonable()
+    {
+        $data = ['a' => 1, 'b' => 2];
+
+        $this->assertJson(arrayed($data));
+        $this->assertStringContainsString(arrayed($data), json_encode($data));
+        $this->assertEquals(json_encode($data), arrayed($data));
+        $this->assertSame(json_encode($data), json_encode(arrayed($data)));
+    }
 }

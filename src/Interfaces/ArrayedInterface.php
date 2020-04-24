@@ -2,11 +2,12 @@
 
 namespace Transprime\Arrayed\Interfaces;
 
-use ArrayAccess;
 use Countable;
+use ArrayAccess;
+use JsonSerializable;
 use IteratorAggregate;
 
-interface ArrayedInterface extends ArrayAccess, Countable, IteratorAggregate
+interface ArrayedInterface extends ArrayAccess, Countable, IteratorAggregate, JsonSerializable
 {
     public static function on(...$values): ArrayedInterface;
 
@@ -48,11 +49,11 @@ interface ArrayedInterface extends ArrayAccess, Countable, IteratorAggregate
 
     public function count(): int;
 
-    public function getIterator();
-
     public function pipe(callable $action, ...$parameters);
 
     public function result(callable $callable = null);
 
     public function initial(): array;
+
+    public function __toString(): string;
 }
