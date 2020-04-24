@@ -4,8 +4,9 @@ namespace Transprime\Arrayed;
 
 use ArrayIterator;
 use Transprime\Arrayed\Types\Undefined;
+use Transprime\Arrayed\Interfaces\ArrayedInterface;
 
-class Arrayed implements \ArrayAccess, \Countable, \IteratorAggregate
+class Arrayed implements ArrayedInterface
 {
     private array $values;
 
@@ -27,12 +28,12 @@ class Arrayed implements \ArrayAccess, \Countable, \IteratorAggregate
         return $this->result($callable);
     }
 
-    public function map($callback): Arrayed
+    public function map($callback): ArrayedInterface
     {
         return $this->setLastResult(array_map($callback, $this->getWorkableItem()));
     }
 
-    public function filter($callback = null, int $flag = 0): Arrayed
+    public function filter($callback = null, int $flag = 0): ArrayedInterface
     {
         if ($callback) {
             return $this->setLastResult(array_filter($this->getWorkableItem(), $callback, $flag));
@@ -41,37 +42,37 @@ class Arrayed implements \ArrayAccess, \Countable, \IteratorAggregate
         return $this->setLastResult(array_filter($this->getWorkableItem()));
     }
 
-    public function reduce($function, $initial = null): Arrayed
+    public function reduce($function, $initial = null): ArrayedInterface
     {
         return $this->setLastResult(array_reduce($this->getWorkableItem(), $function, $initial));
     }
 
-    public function merge(array $array2 = null, ...$_): Arrayed
+    public function merge(array $array2 = null, ...$_): ArrayedInterface
     {
         return $this->setLastResult(array_merge($this->getWorkableItem(), $array2, ...$_));
     }
 
-    public function mergeRecursive(...$_): Arrayed
+    public function mergeRecursive(...$_): ArrayedInterface
     {
         return $this->setLastResult(array_merge_recursive($this->getWorkableItem(), ...$_));
     }
 
-    public function flip(): Arrayed
+    public function flip(): ArrayedInterface
     {
         return $this->setLastResult(array_flip($this->getWorkableItem()));
     }
 
-    public function intersect(array $array2, ...$_): Arrayed
+    public function intersect(array $array2, ...$_): ArrayedInterface
     {
         return $this->setLastResult(array_intersect($this->getWorkableItem(), $array2, ...$_));
     }
 
-    public function values(): Arrayed
+    public function values(): ArrayedInterface
     {
         return $this->setLastResult(array_values($this->getWorkableItem()));
     }
 
-    public function keys($overwrite = true): Arrayed
+    public function keys($overwrite = true): ArrayedInterface
     {
         $keys = array_keys($this->getWorkableItem());
 
@@ -87,12 +88,12 @@ class Arrayed implements \ArrayAccess, \Countable, \IteratorAggregate
         return $this->makeArrayed($this->getWorkableItem()[$offset]);
     }
 
-    public function offsetSet($offset, $value): Arrayed
+    public function offsetSet($offset, $value): ArrayedInterface
     {
         return $this->merge([$offset => $value]);
     }
 
-    public function offsetUnset($offset): Arrayed
+    public function offsetUnset($offset): ArrayedInterface
     {
         $item = $this->getWorkableItem();
 
