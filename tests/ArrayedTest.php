@@ -275,4 +275,27 @@ class ArrayedTest extends TestCase
                 ->values()()
         );
     }
+
+    public function testExtraCallableOnResultMethod()
+    {
+        $this->assertEquals(
+            'name,age',
+            arrayed(['a' => 'name', 'b' => 'age'])
+                ->values()
+                ->result(fn($val) => implode(',', $val))
+        );
+
+        $this->assertEquals(
+            'name,age',
+            arrayed(['a' => 'name', 'b' => 'age'])
+                ->values()(fn($val) => implode(',', $val))
+        );
+
+        $this->assertEquals(
+            'nameage',
+            arrayed(['a' => 'name', 'b' => 'age'])
+                ->values()
+                ->result('implode')
+        );
+    }
 }
