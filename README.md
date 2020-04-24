@@ -22,6 +22,21 @@ arrayed(1,2, 'ninja')
 
 ## Other Usages
 
+Arrayed can be instantiated in 3 ways:
+
+```php
+use Transprime\Arrayed\Arrayed;
+
+// Nifty
+arrayed(1, 2)->count();
+
+// Easier
+Arrayed::on(1, 2)->count();
+
+// Normal with (new instance)
+(new Arrayed(1,2))->count();
+```
+
 As at now not all `array_*` functions have been implemented.
 `pipe()` method helps to call custom function on the array result.
 
@@ -29,17 +44,15 @@ Such as `array_unique` used in this way:
 
 ```php
 arrayed(['a' => 'www', 'b' => 'dot', 'c' => 'www'])
-        ->pipe('array_unique') // data is piped forward to `array_unique`
-        ->flip()
-        ->values()(); //returns ['a', 'b']
+    ->pipe('array_unique') // data is piped forward to `array_unique`
+    ->flip()
+    ->values()(); //returns ['a', 'b']
 ```
 > The pipe method makes use of [Piper](https://github.com/transprime-research/piper) - A PHP functional pipe'ing
 
 ## Coming Soon
 
 - Implement other `array_*` methods
-- Get original/initial values from `Arrayed`
-- Arrayed statically `Arrayed::on([1,2])->sum()`
 - Integrate with [Laravel Collections](https://laravel.com/docs/collections) i.e `collect(arrayed(1, 2, 3))->sum()`
 
 > Api implementation to be decided

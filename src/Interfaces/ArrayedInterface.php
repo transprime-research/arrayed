@@ -8,6 +8,8 @@ use IteratorAggregate;
 
 interface ArrayedInterface extends ArrayAccess, Countable, IteratorAggregate
 {
+    public static function on(...$values): ArrayedInterface;
+
     public function map($callback): ArrayedInterface;
 
     public function filter($callback = null, int $flag = 0): ArrayedInterface;

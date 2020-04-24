@@ -23,6 +23,11 @@ class Arrayed implements ArrayedInterface
         $this->setLastResult(new Undefined());
     }
 
+    public static function on(...$values): ArrayedInterface
+    {
+        return new static($values);
+    }
+
     public function __invoke(callable $callable = null)
     {
         return $this->result($callable);

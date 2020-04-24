@@ -3,13 +3,20 @@
 namespace Piper\Tests;
 
 use PHPUnit\Framework\TestCase;
-use Transprime\Arrayed\{Arrayed, Exceptions\ArrayedException};
+use Transprime\Arrayed\{Arrayed, Interfaces\ArrayedInterface};
 
 class ArrayedTest extends TestCase
 {
     public function testArrayedIsCreated()
     {
         $this->assertIsObject(new Arrayed());
+    }
+
+    public function testIsArrayed()
+    {
+        $this->assertInstanceOf(ArrayedInterface::class, new Arrayed());
+        $this->assertInstanceOf(ArrayedInterface::class, arrayed());
+        $this->assertInstanceOf(ArrayedInterface::class, Arrayed::on());
     }
 
     public function testSum()
