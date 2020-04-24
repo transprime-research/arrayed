@@ -12,7 +12,7 @@ PHP Array(ed) in object oriented way wrapping [PHP Arrays](https://www.php.net/m
 ## Quick Usage
 
 ```php
-arrayed(1,2, 'ninja')
+arrayed(1, 2, 'ninja')
     ->filter(fn($val) => is_int($val))
     ->map(fn($val) => $val + 1)
     ->flip()
