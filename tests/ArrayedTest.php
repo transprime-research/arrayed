@@ -1,6 +1,6 @@
 <?php
 
-namespace Piper\Tests;
+namespace Transprime\Arrayed\Tests;
 
 use PHPUnit\Framework\TestCase;
 use Transprime\Arrayed\{Arrayed, Interfaces\ArrayedInterface};

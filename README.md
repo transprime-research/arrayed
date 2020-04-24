@@ -80,6 +80,7 @@ arrayed(['a' => 'www', 'b' => 'dot', 'c' => 'www'])
     ->values()(); //returns ['a', 'b']
 ```
 > The pipe method makes use of [Piper](https://github.com/transprime-research/piper) - A PHP functional pipe'ing
+> See `\Transprime\Arrayed\Tests\ArrayedTest` 
 
 ## Coming Soon
 
@@ -144,7 +145,7 @@ Arrayed::initial(): array;
 
 ## Additional Information
 
-Be aware that this package is part of a series of "The Proof of Concept" so best practices might not be the top priority.
+Be aware that this package is part of a series of "The Proof of Concept".
 
 See other packages in this series here:
 
@@ -153,7 +154,6 @@ See other packages in this series here:
 - https://github.com/transprime-research/attempt [A smart PHP try...catch statement]
 - https://github.com/omitobi/corbonate [A smart Carbon + Collection package]
 - https://github.com/omitobi/laravel-habitue [Jsonable Http Request(er) package with Collections response]
-- https://github.com/transprime-research/arrayer [Array now an object]
 
 ## Similar packages
 
