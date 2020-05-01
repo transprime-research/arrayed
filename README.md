@@ -1,4 +1,17 @@
-# Arrayed
+<p align="center">
+<img src="https://github.com/transprime-research/assets/blob/master/arrayed/twitter_header_photo_2.png">
+</p>
+
+<p align="center">
+<a href="https://travis-ci.com/transprime-research/arrayed"> <img src="https://travis-ci.org/transprime-research/arrayed.svg?branch=master" alt="Build Status"/></a>
+<a href="https://packagist.org/packages/transprime-research/arrayed"> <img src="https://poser.pugx.org/transprime-research/arrayed/v/stable" alt="Latest Stable Version"/></a>
+<a href="https://packagist.org/packages/transprime-research/arrayed"> <img src="https://poser.pugx.org/transprime-research/arrayed/downloads" alt="Total Downloads"/></a>
+<a href="https://packagist.org/packages/transprime-research/arrayed"> <img src="https://poser.pugx.org/transprime-research/arrayed/v/unstable" alt="Latest Unstable Version"/></a>
+<a href="https://packagist.org/packages/transprime-research/arrayed"> <img src="https://poser.pugx.org/transprime-research/arrayed/d/monthly" alt="Latest Monthly Downloads"/></a>
+  <a href="https://packagist.org/packages/transprime-research/arrayed"> <img src="https://poser.pugx.org/transprime-research/arrayed/license" alt="License"/></a>
+</p>
+
+## About Arrayed
 
 Simple PHP Array(ed) in object oriented way wrapping [PHP Arrays](https://www.php.net/manual/en/ref.array.php) in a consistent manner.
 > No advanced stuff, just wrap PHP array_* functions and a little more. Do it Like a PRO :ok:
