@@ -53,6 +53,11 @@ interface ArrayedInterface extends ArrayAccess, Countable, IteratorAggregate, Js
 
     public function result(callable $callable = null);
 
+    public function raw(): array;
+
+    /**
+     * @deprecated Use raw() instead
+     */
     public function initial(): array;
 
     public function __toString(): string;

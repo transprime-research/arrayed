@@ -8,16 +8,16 @@ use Transprime\Arrayed\Interfaces\ArrayedInterface;
 
 class Arrayed implements ArrayedInterface
 {
-    private array $values;
+    private array $raw;
 
     private $lastResult;
 
     public function __construct(...$values)
     {
         if (func_num_args() === 1 && is_array($values[0])) {
-            $this->values = $values[0];
+            $this->raw = $values[0];
         } else {
-            $this->values = $values;
+            $this->raw = $values;
         }
 
         $this->setLastResult(new Undefined());
@@ -173,7 +173,7 @@ class Arrayed implements ArrayedInterface
     private function getWorkableItem(bool $asArray = false)
     {
         if ($this->lastResult instanceof Undefined) {
-            return $this->values;
+            return $this->raw;
         }
 
         return ($asArray && !is_array($this->lastResult)) ? (array)$this->lastResult : $this->lastResult;
@@ -184,9 +184,17 @@ class Arrayed implements ArrayedInterface
         return is_array($data) ? new static($data) : $data;
     }
 
+    public function raw(): array
+    {
+        return $this->raw;
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function initial(): array
     {
-        return $this->values;
+        return $this->raw;
     }
 
     public function __toString(): string

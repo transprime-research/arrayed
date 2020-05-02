@@ -24,8 +24,8 @@ class ArrayedTest extends TestCase
         $data = ['1', 2];
         $data2 = ['1', 2];
 
-        $this->assertSame(arrayed($data)->keys()->initial(), $data);
-        $this->assertSame(arrayed(...$data2)->keys()->initial(), $data2);
+        $this->assertSame(arrayed($data)->keys()->raw(), $data);
+        $this->assertSame(arrayed(...$data2)->keys()->raw(), $data2);
     }
 
     public function testSum()

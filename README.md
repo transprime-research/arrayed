@@ -110,10 +110,10 @@ arrayed(['a' => 'name', 'b' => 'age'])
     ->values()(fn($val) => implode(',', $val)); //'name,age'
 ```
 
-Get the original array data with `initial()` method
+Get the original array data with `raw()` method
 
 ```php
-arrayed([1, 2])->initial(); //[1,2]
+arrayed([1, 2])->raw(); //[1,2]
 ```
 
 As at now not all `array_*` functions have been implemented.
@@ -185,7 +185,9 @@ Arrayed::pipe(callable $action, ...$parameters);
 
 Arrayed::result(callable $callable = null);
 
-Arrayed::initial(): array;
+Arrayed::raw(): array;
+
+Arrayed::initial(): array; // Deprecated, use raw() instead
 
 Arrayed::__toString(): string; // returns string rep of the array
 ```
