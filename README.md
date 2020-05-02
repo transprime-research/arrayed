@@ -87,7 +87,7 @@ response()->json(arrayed(1, 2, 3)->flip());
 
 ## Others
 
-If any operation normally returns an array, the return value will give `Arrayed` instance so that other methods can be chained on them otherwise a non-array value is returned as can be seen above that `sum()` returns an integer in the example below:
+If any operation normally returns an array, the return value will give `Arrayed` instance so that other methods can be chained on them otherwise a non-array value is returned as can be seen that `sum()` returns an integer in the example below:
 
 Example:
 
@@ -113,7 +113,7 @@ arrayed(['a' => 'name', 'b' => 'age'])
 Get the original array data with `initial()` method
 
 ```php
-arrayed([1, 2])->flip()->initial(); //[1, 2]
+arrayed([1, 2])->initial(); //[1,2]
 ```
 
 As at now not all `array_*` functions have been implemented.
