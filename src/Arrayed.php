@@ -3,11 +3,14 @@
 namespace Transprime\Arrayed;
 
 use ArrayIterator;
+use Transprime\Arrayed\Traits\ArrayPrefix;
 use Transprime\Arrayed\Types\Undefined;
 use Transprime\Arrayed\Interfaces\ArrayedInterface;
 
 class Arrayed implements ArrayedInterface
 {
+    use ArrayPrefix;
+
     private $raw;
 
     private $result;
