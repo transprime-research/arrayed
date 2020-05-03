@@ -24,8 +24,8 @@ class ArrayedTest extends TestCase
         $data = ['1', 2];
         $data2 = ['1', 2];
 
-        $this->assertSame(arrayed($data)->keys()->initial(), $data);
-        $this->assertSame(arrayed(...$data2)->keys()->initial(), $data2);
+        $this->assertSame(arrayed($data)->keys()->raw(), $data);
+        $this->assertSame(arrayed(...$data2)->keys()->raw(), $data2);
     }
 
     public function testSum()
@@ -34,8 +34,12 @@ class ArrayedTest extends TestCase
         $this->assertEquals(
             5,
             arrayed(1, 2, 'ninja')
-                ->filter(fn($val) => is_int($val))
-                ->map(fn($val) => $val + 1)
+                ->filter(function ($val) {
+                    return is_int($val);
+                })
+                ->map(function ($val) {
+                    return $val + 1;
+                })
                 ->sum()
         );
     }
@@ -45,8 +49,12 @@ class ArrayedTest extends TestCase
         $this->assertEquals(
             5,
             arrayed([1, 2, 'ninja'])
-                ->filter(fn($val) => is_int($val))
-                ->map(fn($val) => $val + 1)
+                ->filter(function ($val) {
+                    return is_int($val);
+                })
+                ->map(function ($val) {
+                    return $val + 1;
+                })
                 ->sum()
         );
     }
@@ -55,14 +63,21 @@ class ArrayedTest extends TestCase
     {
         $this->assertEquals(
             6,
-            arrayed([1, 2, 3])->reduce(fn($acc, $item) => $acc + $item, 0)()
+            arrayed([1, 2, 3])
+                ->reduce(function ($acc, $item) {
+                    return $acc + $item;
+                }, 0)()
         );
 
         $this->assertEquals(
             7,
             arrayed(1, 2)
-                ->map(fn($i) => $i + 1)
-                ->reduce(fn($v, $i) => $v + $i, 2)()
+                ->map(function ($i) {
+                    return $i + 1;
+                })
+                ->reduce(function ($v, $i) {
+                    return $v + $i;
+                }, 2)()
         );
     }
 
@@ -127,10 +142,11 @@ class ArrayedTest extends TestCase
             arrayed(['a' => 1, 'b' => 2])['b']
         );
 
-        $this->assertCount(
-            2,
-            [...arrayed([1, 2])]
-        );
+        // Until its PHP 7.4
+//        $this->assertCount(
+//            2,
+//            [...arrayed([1, 2])]
+//        );
 
         [$a,] = arrayed([1, 2]);
         $this->assertEquals(
@@ -245,7 +261,9 @@ class ArrayedTest extends TestCase
         $this->assertEquals(
             5,
             arrayed(\arrayed(1), \arrayed(2))
-                ->map(fn($i) => $i[0] + 1)
+                ->map(function ($i) {
+                    return $i[0] + 1;
+                })
                 ->sum()
         );
     }
@@ -282,13 +300,17 @@ class ArrayedTest extends TestCase
             'name,age',
             arrayed(['a' => 'name', 'b' => 'age'])
                 ->values()
-                ->result(fn($val) => implode(',', $val))
+                ->result(function ($val) {
+                    return implode(',', $val);
+                })
         );
 
         $this->assertEquals(
             'name,age',
             arrayed(['a' => 'name', 'b' => 'age'])
-                ->values()(fn($val) => implode(',', $val))
+                ->values()(function ($val) {
+                return implode(',', $val);
+            })
         );
 
         $this->assertEquals(

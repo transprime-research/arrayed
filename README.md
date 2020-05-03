@@ -24,6 +24,11 @@ Simple PHP Array(ed) in object oriented way wrapping [PHP Arrays](https://www.ph
 composer require transprime-research/arrayed
 ```
 
+## Requirement
+Minimum Requirement
+- PHP 7.2 +
+- Composer
+
 ## Quick Usage
 
 ```php
@@ -34,6 +39,17 @@ arrayed(1, 2, 'ninja')
     ->values()
     ->sum()(); //use () or ->result() at the end;
 ```
+
+Instead of:
+
+```php
+$result = array_filter([1, 2, 'ninja'], fn($val) => is_int($val));
+$result = array_map(fn($val) => $val + 1, $result);
+$result = array_flip($result);
+$result = array_values($result);
+$result = array_sum($result);
+```
+> PS: You can still use the old `function() { return v; }`, `fn()` is the new short arrow function in PHP 7.4+ See: https://www.php.net/manual/en/functions.arrow.php
 
 ## Other Usages
 
@@ -110,10 +126,10 @@ arrayed(['a' => 'name', 'b' => 'age'])
     ->values()(fn($val) => implode(',', $val)); //'name,age'
 ```
 
-Get the original array data with `initial()` method
+Get the original array data with `raw()` method
 
 ```php
-arrayed([1, 2])->initial(); //[1,2]
+arrayed([1, 2])->raw(); //[1,2]
 ```
 
 As at now not all `array_*` functions have been implemented.
@@ -185,7 +201,9 @@ Arrayed::pipe(callable $action, ...$parameters);
 
 Arrayed::result(callable $callable = null);
 
-Arrayed::initial(): array;
+Arrayed::raw(): array;
+
+Arrayed::initial(): array; // Deprecated, use raw() instead
 
 Arrayed::__toString(): string; // returns string rep of the array
 ```

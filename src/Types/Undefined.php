@@ -2,7 +2,7 @@
 
 namespace Transprime\Arrayed\Types;
 
-class Undefined
+final class Undefined
 {
 
 }
