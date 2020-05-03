@@ -21,4 +21,17 @@ class ArrayPrefixTraitTest extends TestCase
             arrayed(1,2,3,4)->chunk(2)->result()
         );
     }
+
+    public function testColumn()
+    {
+        $array = [
+            ['a' => 1, 'b' => 4],
+            ['a' => 2, 'b' => 3],
+        ];
+
+        $this->assertEquals(
+            [4, 3],
+            arrayed($array)->column('b')->result()
+        );
+    }
 }

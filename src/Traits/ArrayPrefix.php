@@ -15,4 +15,9 @@ trait ArrayPrefix
     {
         return $this->setResult(array_chunk($this->getWorkableItem(), $size, $preserve_keys));
     }
+
+    public function column($column, $index_key = null): ArrayedInterface
+    {
+        return $this->setResult(array_column($this->getWorkableItem(), $column, $index_key));
+    }
 }
