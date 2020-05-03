@@ -26,7 +26,7 @@ composer require transprime-research/arrayed
 
 ## Requirement
 Minimum Requirement
-- PHP 7.0 +
+- PHP 7.2 +
 - Composer
 
 ## Quick Usage
