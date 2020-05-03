@@ -142,10 +142,11 @@ class ArrayedTest extends TestCase
             arrayed(['a' => 1, 'b' => 2])['b']
         );
 
-        $this->assertCount(
-            2,
-            [...arrayed([1, 2])]
-        );
+        // Until its PHP 7.4
+//        $this->assertCount(
+//            2,
+//            [...arrayed([1, 2])]
+//        );
 
         [$a,] = arrayed([1, 2]);
         $this->assertEquals(
