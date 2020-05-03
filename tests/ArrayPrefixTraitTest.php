@@ -13,4 +13,12 @@ class ArrayPrefixTraitTest extends TestCase
             arrayed(['abc' => 'cde'])->changeKeyCase(CASE_UPPER)->result()
         );
     }
+
+    public function testChunk()
+    {
+        $this->assertEquals(
+            [[1,2], [3,4]],
+            arrayed(1,2,3,4)->chunk(2)->result()
+        );
+    }
 }
