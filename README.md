@@ -23,6 +23,10 @@ Simple PHP Array(ed) in object oriented way wrapping [PHP Arrays](https://www.ph
 ```shell script
 composer require transprime-research/arrayed
 ```
+## Requirement
+Minimum Requirement
+- PHP 7.4
+- Composer
 
 ## Quick Usage
 
