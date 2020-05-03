@@ -3,11 +3,14 @@
 namespace Transprime\Arrayed;
 
 use ArrayIterator;
+use Transprime\Arrayed\Traits\ArrayPrefix;
 use Transprime\Arrayed\Types\Undefined;
 use Transprime\Arrayed\Interfaces\ArrayedInterface;
 
 class Arrayed implements ArrayedInterface
 {
+    use ArrayPrefix;
+
     private $raw;
 
     private $result;
@@ -20,7 +23,7 @@ class Arrayed implements ArrayedInterface
             $this->raw = $values;
         }
 
-        $this->setLastResult(new Undefined());
+        $this->setResult(new Undefined());
     }
 
     public static function on(...$values): ArrayedInterface
@@ -35,46 +38,46 @@ class Arrayed implements ArrayedInterface
 
     public function map($callback): ArrayedInterface
     {
-        return $this->setLastResult(array_map($callback, $this->getWorkableItem()));
+        return $this->setResult(array_map($callback, $this->getWorkableItem()));
     }
 
     public function filter($callback = null, int $flag = 0): ArrayedInterface
     {
         if ($callback) {
-            return $this->setLastResult(array_filter($this->getWorkableItem(), $callback, $flag));
+            return $this->setResult(array_filter($this->getWorkableItem(), $callback, $flag));
         }
 
-        return $this->setLastResult(array_filter($this->getWorkableItem()));
+        return $this->setResult(array_filter($this->getWorkableItem()));
     }
 
     public function reduce($function, $initial = null): ArrayedInterface
     {
-        return $this->setLastResult(array_reduce($this->getWorkableItem(), $function, $initial));
+        return $this->setResult(array_reduce($this->getWorkableItem(), $function, $initial));
     }
 
     public function merge(array $array2 = null, ...$_): ArrayedInterface
     {
-        return $this->setLastResult(array_merge($this->getWorkableItem(), $array2, ...$_));
+        return $this->setResult(array_merge($this->getWorkableItem(), $array2, ...$_));
     }
 
     public function mergeRecursive(...$_): ArrayedInterface
     {
-        return $this->setLastResult(array_merge_recursive($this->getWorkableItem(), ...$_));
+        return $this->setResult(array_merge_recursive($this->getWorkableItem(), ...$_));
     }
 
     public function flip(): ArrayedInterface
     {
-        return $this->setLastResult(array_flip($this->getWorkableItem()));
+        return $this->setResult(array_flip($this->getWorkableItem()));
     }
 
     public function intersect(array $array2, ...$_): ArrayedInterface
     {
-        return $this->setLastResult(array_intersect($this->getWorkableItem(), $array2, ...$_));
+        return $this->setResult(array_intersect($this->getWorkableItem(), $array2, ...$_));
     }
 
     public function values(): ArrayedInterface
     {
-        return $this->setLastResult(array_values($this->getWorkableItem()));
+        return $this->setResult(array_values($this->getWorkableItem()));
     }
 
     public function keys($overwrite = true): ArrayedInterface
@@ -85,7 +88,7 @@ class Arrayed implements ArrayedInterface
             return $this->makeArrayed($keys);
         }
 
-        return $this->setLastResult($keys);
+        return $this->setResult($keys);
     }
 
     public function offsetGet($offset)
@@ -104,7 +107,7 @@ class Arrayed implements ArrayedInterface
 
         unset($item[$offset]);
 
-        return $this->setLastResult($item);
+        return $this->setResult($item);
     }
 
     //Scalar returns
@@ -153,12 +156,12 @@ class Arrayed implements ArrayedInterface
 
     public function pipe(callable $action, ...$parameters)
     {
-        return $this->setLastResult(
+        return $this->setResult(
             piper($this->getWorkableItem())->to($action, ...$parameters)()
         );
     }
 
-    private function setLastResult($value)
+    private function setResult($value)
     {
         $this->result = $value;
 

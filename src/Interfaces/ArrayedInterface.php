@@ -61,4 +61,12 @@ interface ArrayedInterface extends ArrayAccess, Countable, IteratorAggregate, Js
     public function initial(): array;
 
     public function __toString(): string;
+
+
+
+    public function changeKeyCase(int $case = null): ArrayedInterface;
+
+    public function chunk(int $size, bool $preserve_keys = false): ArrayedInterface;
+
+    public function column($column, $index_key = null): ArrayedInterface;
 }
