@@ -146,6 +146,18 @@ arrayed(['a' => 'www', 'b' => 'dot', 'c' => 'www'])
 > The pipe method makes use of [Piper](https://github.com/transprime-research/piper) - A PHP functional pipe'ing
 > See `\Transprime\Arrayed\Tests\ArrayedTest` 
 
+#### Proxied calls
+
+`array_*` methods that are not yet implemented are automatically proxied to call an array method with the assumption that they accept initial array first. Example is this:
+
+```php
+// ->combine() method is not yet implemented
+
+arrayed(['a', 'b'])
+    ->combine(['name', 'data'])
+    ->result(); //['a' => 'name', 'b' => 'data']
+```
+
 ## Coming Soon
 
 - Implement other `array_*` methods

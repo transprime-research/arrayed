@@ -2,6 +2,7 @@
 
 namespace Transprime\Arrayed\Traits;
 
+use Transprime\Arrayed\Exceptions\ArrayedException;
 use Transprime\Arrayed\Interfaces\ArrayedInterface;
 
 trait ArrayPrefix
@@ -19,5 +20,31 @@ trait ArrayPrefix
     public function column($column, $index_key = null): ArrayedInterface
     {
         return $this->setResult(array_column($this->getWorkableItem(), $column, $index_key));
+    }
+
+    /**
+     * Forward the calls to `array_*` that is not yet implemented
+     * <br>
+     * Assumption is for those array method that accepts the initial array as the first value
+     * @param $name
+     * @param $arguments
+     * @return mixed
+     * @throws ArrayedException
+     */
+    public function __call($name, $arguments)
+    {
+        // See: https://stackoverflow.com/a/57833019/5704410
+        $methodName = strtolower(preg_replace("/([a-z])([A-Z])/", "$1_$2", $name));
+        $methodName = 'array_' . $methodName;
+
+        if (function_exists($methodName)) {
+            $result = $methodName($this->getWorkableItem(), ...$arguments);
+
+            return is_array($result)
+                ? $this->setResult($result)
+                : $result;
+        }
+
+        throw new ArrayedException(sprintf('Method %s cannot be resolved', $name));
     }
 }
