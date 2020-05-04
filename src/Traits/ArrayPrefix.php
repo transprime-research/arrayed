@@ -38,7 +38,6 @@ trait ArrayPrefix
         $methodName = 'array_' . $methodName;
 
         if (function_exists($methodName)) {
-
             $result = $methodName($this->getWorkableItem(), ...$arguments);
 
             return is_array($result)

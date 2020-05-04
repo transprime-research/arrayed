@@ -210,6 +210,6 @@ class Arrayed implements ArrayedInterface
      */
     public function jsonSerialize()
     {
-       return $this->getWorkableItem(true);
+        return $this->getWorkableItem(true);
     }
 }

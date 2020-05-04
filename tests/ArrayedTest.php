@@ -309,8 +309,8 @@ class ArrayedTest extends TestCase
             'name,age',
             arrayed(['a' => 'name', 'b' => 'age'])
                 ->values()(function ($val) {
-                return implode(',', $val);
-            })
+                    return implode(',', $val);
+                })
         );
 
         $this->assertEquals(

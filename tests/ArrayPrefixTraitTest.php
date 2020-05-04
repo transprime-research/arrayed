@@ -18,7 +18,7 @@ class ArrayPrefixTraitTest extends TestCase
     {
         $this->assertEquals(
             [[1,2], [3,4]],
-            arrayed(1,2,3,4)->chunk(2)->result()
+            arrayed(1, 2, 3, 4)->chunk(2)->result()
         );
     }
 
