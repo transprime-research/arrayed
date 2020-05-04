@@ -33,11 +33,17 @@ trait ArrayPrefix
      */
     public function __call($name, $arguments)
     {
+        // See: https://stackoverflow.com/a/57833019/5704410
         $methodName = strtolower(preg_replace("/([a-z])([A-Z])/", "$1_$2", $name));
-        $methodName = 'array_'.$methodName;
+        $methodName = 'array_' . $methodName;
 
         if (function_exists($methodName)) {
-            return $name($this->getWorkableItem(), ...$arguments);
+
+            $result = $methodName($this->getWorkableItem(), ...$arguments);
+
+            return is_array($result)
+                ? $this->setResult($result)
+                : $result;
         }
 
         throw new ArrayedException(sprintf('Method %s cannot be resolved', $name));

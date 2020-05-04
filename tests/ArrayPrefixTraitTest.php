@@ -34,4 +34,16 @@ class ArrayPrefixTraitTest extends TestCase
             arrayed($array)->column('b')->result()
         );
     }
+
+    public function testUnImplementedArrayPrefixFunction()
+    {
+        // array_combine
+        $keys = ['a', 'b'];
+        $values = ['name', 'data'];
+
+        $this->assertEquals(
+            array_combine($keys, $values),
+            arrayed($keys)->combine($values)->result()
+        );
+    }
 }
