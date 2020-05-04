@@ -22,6 +22,11 @@ trait ArrayPrefix
         return $this->setResult(array_column($this->getWorkableItem(), $column, $index_key));
     }
 
+    public function countValues(): ArrayedInterface
+    {
+        return $this->setResult(array_count_values($this->getWorkableItem()));
+    }
+
     /**
      * Forward the calls to `array_*` that is not yet implemented
      * <br>

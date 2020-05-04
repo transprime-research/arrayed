@@ -35,6 +35,14 @@ class ArrayPrefixTraitTest extends TestCase
         );
     }
 
+    public function testCountValues()
+    {
+        $this->assertEquals(
+            ['a' => 2, 'b' => 2, 1 => 1, 4 => 1],
+            arrayed(['a', 1, 'b', 4, 'b', 'a'])->countValues()->result()
+        );
+    }
+
     public function testUnImplementedArrayPrefixFunction()
     {
         // array_combine
