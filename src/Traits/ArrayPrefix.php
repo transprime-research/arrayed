@@ -27,6 +27,11 @@ trait ArrayPrefix
         return $this->setResult(array_count_values($this->getWorkableItem()));
     }
 
+    public function diffAssoc(array $array2, array ...$_): ArrayedInterface
+    {
+        return $this->setResult(array_diff_assoc($this->getWorkableItem(), $array2, ...$_));
+    }
+
     /**
      * Forward the calls to `array_*` that is not yet implemented
      * <br>

@@ -43,6 +43,15 @@ class ArrayPrefixTraitTest extends TestCase
         );
     }
 
+    public function testDiffAssoc()
+    {
+        $array2 = ['a' => 2, 'b' => 2];
+        $this->assertEquals(
+            ['c' => 3],
+            arrayed(['a' => 2, 'c' => 3, 'b' => 2])->diffAssoc($array2)->result()
+        );
+    }
+
     public function testUnImplementedArrayPrefixFunction()
     {
         // array_combine

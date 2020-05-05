@@ -71,4 +71,6 @@ interface ArrayedInterface extends ArrayAccess, Countable, IteratorAggregate, Js
     public function column($column, $index_key = null): ArrayedInterface;
 
     public function countValues(): ArrayedInterface;
+
+    public function diffAssoc(array $array2, array ...$_): ArrayedInterface;
 }
