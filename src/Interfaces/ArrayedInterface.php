@@ -62,6 +62,8 @@ interface ArrayedInterface extends ArrayAccess, Countable, IteratorAggregate, Js
 
     public function __toString(): string;
 
+    public function copy(): ArrayedInterface;
+
 
 
     public function changeKeyCase(int $case = null): ArrayedInterface;
@@ -76,8 +78,8 @@ interface ArrayedInterface extends ArrayAccess, Countable, IteratorAggregate, Js
 
     public function diff(array $array2, array ...$_): ArrayedInterface;
 
+    public function reverse(bool $preserve_keys = false): ArrayedInterface;
 
-    public function copy(): ArrayedInterface;
 
     /**
      * Like php array_key_exists, this instead search if (one or more) keys exists in the array

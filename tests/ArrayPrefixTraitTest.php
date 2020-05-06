@@ -69,6 +69,14 @@ class ArrayPrefixTraitTest extends TestCase
         );
     }
 
+    public function testReverse()
+    {
+        $this->assertEquals(
+            ['c' => 'd', 'a' => 'b'],
+            arrayed(['a' => 'b', 'c' => 'd'])->reverse()->result()
+        );
+    }
+
     public function testUnImplementedArrayPrefixFunction()
     {
         // array_combine

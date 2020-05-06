@@ -37,6 +37,11 @@ trait ArrayPrefix
         return $this->setResult(array_diff($this->getWorkableItem(), $array2, ...$_));
     }
 
+    public function reverse(bool $preserve_keys = false): ArrayedInterface
+    {
+        return $this->setResult(array_reverse($this->getWorkableItem(), $preserve_keys));
+    }
+
     /**
      * Like php array_key_exists, this instead search if (one or more) keys exists in the array
      *
