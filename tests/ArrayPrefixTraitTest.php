@@ -61,6 +61,14 @@ class ArrayPrefixTraitTest extends TestCase
         );
     }
 
+    public function testKeysExists()
+    {
+        $this->assertEquals(
+            true,
+            arrayed(['a' => 'b', 'c' => 'd'])->keysExists(['a', 'c'])
+        );
+    }
+
     public function testUnImplementedArrayPrefixFunction()
     {
         // array_combine

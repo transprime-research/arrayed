@@ -38,6 +38,23 @@ trait ArrayPrefix
     }
 
     /**
+     * Like php array_key_exists, this instead search if (one or more) keys exists in the array
+     *
+     * @param array $needles - keys to look for in the array
+     * @param bool $all - [Optional] if false then checks if at least one key is found
+     * @return bool true if the needle(s) is found else false
+     */
+    public function keysExists(array $needles, bool $all = true): bool
+    {
+        $size = arrayed($needles)->count();
+        $intersect = $this->keys()->intersect($needles);
+
+        return $all
+            ? ($intersect->count() === $size)
+            : (!$intersect->empty());
+    }
+
+    /**
      * Forward the calls to `array_*` that is not yet implemented
      * <br>
      * Assumption is for those array method that accepts the initial array as the first value

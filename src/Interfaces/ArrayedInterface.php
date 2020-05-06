@@ -76,5 +76,15 @@ interface ArrayedInterface extends ArrayAccess, Countable, IteratorAggregate, Js
 
     public function diff(array $array2, array ...$_): ArrayedInterface;
 
+
     public function copy(): ArrayedInterface;
+
+    /**
+     * Like php array_key_exists, this instead search if (one or more) keys exists in the array
+     *
+     * @param array $needles - keys to look for in the array
+     * @param bool $all - [Optional] if false then checks if at least one key is found
+     * @return bool true if the needle(s) is found else false
+     */
+    public function keysExists(array $needles, bool $all = true): bool;
 }
