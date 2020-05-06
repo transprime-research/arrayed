@@ -52,6 +52,15 @@ class ArrayPrefixTraitTest extends TestCase
         );
     }
 
+    public function testDiff()
+    {
+        $array2 = ['a', 'b'];
+        $this->assertEquals(
+            ['c'],
+            arrayed(['a', 'c', 'b'])->diff($array2)->values()->result()
+        );
+    }
+
     public function testUnImplementedArrayPrefixFunction()
     {
         // array_combine
