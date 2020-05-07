@@ -330,4 +330,12 @@ class ArrayedTest extends TestCase
         $this->assertEquals(json_encode($data), arrayed($data));
         $this->assertSame(json_encode($data), json_encode(arrayed($data)));
     }
+
+    public function testCopy()
+    {
+        $arrayed = arrayed(1, 2, 3);
+
+        $this->assertEquals($arrayed, $arrayed->copy());
+        $this->assertNotSame($arrayed, $arrayed->copy());
+    }
 }

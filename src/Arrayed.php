@@ -212,4 +212,9 @@ class Arrayed implements ArrayedInterface
     {
         return $this->getWorkableItem(true);
     }
+
+    public function copy(): ArrayedInterface
+    {
+        return new self($this->result());
+    }
 }

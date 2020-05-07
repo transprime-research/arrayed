@@ -35,6 +35,48 @@ class ArrayPrefixTraitTest extends TestCase
         );
     }
 
+    public function testCountValues()
+    {
+        $this->assertEquals(
+            ['a' => 2, 'b' => 2, 1 => 1, 4 => 1],
+            arrayed(['a', 1, 'b', 4, 'b', 'a'])->countValues()->result()
+        );
+    }
+
+    public function testDiffAssoc()
+    {
+        $array2 = ['a' => 2, 'b' => 2];
+        $this->assertEquals(
+            ['c' => 3],
+            arrayed(['a' => 2, 'c' => 3, 'b' => 2])->diffAssoc($array2)->result()
+        );
+    }
+
+    public function testDiff()
+    {
+        $array2 = ['a', 'b'];
+        $this->assertEquals(
+            ['c'],
+            arrayed(['a', 'c', 'b'])->diff($array2)->values()->result()
+        );
+    }
+
+    public function testKeysExists()
+    {
+        $this->assertEquals(
+            true,
+            arrayed(['a' => 'b', 'c' => 'd'])->keysExists(['a', 'c'])
+        );
+    }
+
+    public function testReverse()
+    {
+        $this->assertEquals(
+            ['c' => 'd', 'a' => 'b'],
+            arrayed(['a' => 'b', 'c' => 'd'])->reverse()->result()
+        );
+    }
+
     public function testUnImplementedArrayPrefixFunction()
     {
         // array_combine
