@@ -2,9 +2,10 @@
 
 namespace Transprime\Arrayed;
 
+use Closure;
 use ArrayIterator;
-use Transprime\Arrayed\Traits\ArrayPrefix;
 use Transprime\Arrayed\Types\Undefined;
+use Transprime\Arrayed\Traits\ArrayPrefix;
 use Transprime\Arrayed\Interfaces\ArrayedInterface;
 
 class Arrayed implements ArrayedInterface
@@ -216,5 +217,12 @@ class Arrayed implements ArrayedInterface
     public function copy(): ArrayedInterface
     {
         return new self($this->result());
+    }
+
+    public function tap(Closure $closure): ArrayedInterface
+    {
+        function_exists('tap') ? tap($closure, $this->copy()) : $closure($this->copy());
+
+        return $this;
     }
 }

@@ -338,4 +338,15 @@ class ArrayedTest extends TestCase
         $this->assertEquals($arrayed, $arrayed->copy());
         $this->assertNotSame($arrayed, $arrayed->copy());
     }
+
+    public function testTap()
+    {
+        $res = [];
+        $arrayed = arrayed(1, 2, 3)
+            ->tap(function ($arrd) use (&$res) {
+                $res = $arrd->reverse();
+            });
+
+        $this->assertEquals($arrayed[0], $res[2]);
+    }
 }

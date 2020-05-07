@@ -2,6 +2,7 @@
 
 namespace Transprime\Arrayed\Interfaces;
 
+use Closure;
 use Countable;
 use ArrayAccess;
 use JsonSerializable;
@@ -63,6 +64,8 @@ interface ArrayedInterface extends ArrayAccess, Countable, IteratorAggregate, Js
     public function __toString(): string;
 
     public function copy(): ArrayedInterface;
+
+    public function tap(Closure $closure): ArrayedInterface;
 
 
 
