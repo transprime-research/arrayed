@@ -85,6 +85,16 @@ arrayed(['a' => 1, 'b' => 2]);
 
 Laravel Collections
 
+New: `collect()` method :tada:
+
+```php
+arrayed(1,2)->collect(); // instance of Illuminate/Support/Collection
+arrayed(1,2)->collect(3, 4); //merged with first one to give [1, 2, 3, 4] 
+```
+> Swap out the default Collection class by editing `config/arrayed.php`'s collection_class value
+
+Others:
+
 ```php
 collect(arrayed(1, 2, 3, 4));
 
@@ -99,6 +109,17 @@ Laravel Response accepts `Arrayed`:
 
 ```php
 response()->json(arrayed(1, 2, 3)->flip());
+```
+
+#### Special methods
+
+New :tada: `tap()` method allows other actions on the last resulting `Arrayed` instance without mutating the last `Arrayed` result:
+
+```php
+arrayed(1, 2, 3)
+    ->tap(function ($arrd) {
+        logger('Array has '.$arrd->count());
+    });
 ```
 
 ## Others
@@ -169,7 +190,7 @@ arrayed(['a', 'b'])
 These are the API's available
 
 ```php
-static Arrayed::on(...$values): ArrayedInterface;
+static Arrayed::on(...$values): ArrayedInterface; //new instance of Arrayed
 
 Arrayed::map($callback): ArrayedInterface;
 
@@ -217,7 +238,29 @@ Arrayed::raw(): array;
 
 Arrayed::initial(): array; // Deprecated, use raw() instead
 
-Arrayed::__toString(): string; // returns string rep of the array
+Arrayed::tap(Closure $closure): ArrayedInterface;
+
+Arrayed::copy(): ArrayedInterface;
+
+Arrayed::collect(...$with): array;
+
+// Other Array_* methods
+
+Arrayed::changeKeyCase(int $case = null): ArrayedInterface;
+
+Arrayed::chunk(int $size, bool $preserve_keys = false): ArrayedInterface;
+
+Arrayed::column($column, $index_key = null): ArrayedInterface;
+
+Arrayed::countValues(): ArrayedInterface;
+
+Arrayed::diffAssoc(array $array2, array ...$_): ArrayedInterface;
+
+Arrayed::diff(array $array2, array ...$_): ArrayedInterface;
+
+Arrayed::reverse(bool $preserve_keys = false): ArrayedInterface;
+
+
 ```
 
 ## Additional Information
