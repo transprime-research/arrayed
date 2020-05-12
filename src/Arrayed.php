@@ -222,7 +222,7 @@ class Arrayed implements ArrayedInterface
 
     public function tap(Closure $closure): ArrayedInterface
     {
-        function_exists('tap') ? tap($closure, $this->copy()) : $closure($this->copy());
+        function_exists('tap') ? tap($this->copy(), $closure) : $closure($this->copy());
 
         return $this;
     }
