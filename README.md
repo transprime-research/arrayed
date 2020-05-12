@@ -234,6 +234,7 @@ See other packages in this series here:
 
 ## Similar packages
 
+- https://github.com/cocur/chain - Very identical, but without Piper
 - https://github.com/bocharsky-bw/Arrayzy - Identical but with more actions and features
 - https://github.com/voku/Arrayy - Perform more than just an OOP style on Arrays
 - https://github.com/dantodev/php-array-tools - array tools plus collections
