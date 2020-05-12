@@ -33,11 +33,11 @@ Minimum Requirement
 
 ```php
 arrayed(1, 2, 'ninja')
-    ->filter(fn($val) => is_int($val))
-    ->map(fn($val) => $val + 1)
-    ->flip()
-    ->values()
-    ->sum()(); //use () or ->result() at the end;
+    ->filter(fn($val) => is_int($val)) // [1,2]
+    ->map(fn($val) => $val + 1) // [2, 3]
+    ->flip() // [0, 1]
+    ->values() // [0, 1]
+    ->sum(); // 1
 ```
 
 Instead of:
@@ -85,6 +85,16 @@ arrayed(['a' => 1, 'b' => 2]);
 
 Laravel Collections
 
+New: `collect()` method :tada:
+
+```php
+arrayed(1,2)->collect(); // instance of Illuminate/Support/Collection
+arrayed(1,2)->collect(3, 4); //merged with first one to give [1, 2, 3, 4] 
+```
+> In the future, changing the default Collection class will possible by editing `config/arrayed.php`'s collection_class value
+
+Others:
+
 ```php
 collect(arrayed(1, 2, 3, 4));
 
@@ -101,6 +111,17 @@ Laravel Response accepts `Arrayed`:
 response()->json(arrayed(1, 2, 3)->flip());
 ```
 
+#### Special methods
+
+New :tada: `tap()` method allows other actions on the last resulting `Arrayed` instance without mutating the last `Arrayed` result:
+
+```php
+arrayed(1, 2, 3)
+    ->tap(function ($arrd) {
+        logger('Array has '.$arrd->count());
+    });
+```
+
 ## Others
 
 If any operation normally returns an array, the return value will give `Arrayed` instance so that other methods can be chained on them otherwise a non-array value is returned as can be seen that `sum()` returns an integer in the example below:
@@ -113,7 +134,7 @@ arrayed(['a' => 1, 'b' => 2])
     ->sum(); // returns an integer, we cannot chain
 ```
 
-You can still work on the result (if its an array'ed value) by passing a closure/callable function to `result()` method:
+You can work on a result (if its an array'ed value) by passing a closure/callable function to `result()` method:
 
 ```php
 arrayed(['a' => 'name', 'b' => 'age'])
@@ -132,6 +153,7 @@ Get the original array data with `raw()` method
 arrayed([1, 2])->raw(); //[1,2]
 ```
 
+#### Piped calls
 As at now not all `array_*` functions have been implemented.
 `pipe()` method helps to call custom function on the array result.
 
@@ -166,10 +188,10 @@ arrayed(['a', 'b'])
 
 ## APIs
 
-These are the API's available
+These are the API's available:
 
 ```php
-static Arrayed::on(...$values): ArrayedInterface;
+static Arrayed::on(...$values): ArrayedInterface; //new instance of Arrayed
 
 Arrayed::map($callback): ArrayedInterface;
 
@@ -217,7 +239,29 @@ Arrayed::raw(): array;
 
 Arrayed::initial(): array; // Deprecated, use raw() instead
 
-Arrayed::__toString(): string; // returns string rep of the array
+Arrayed::tap(Closure $closure): ArrayedInterface;
+
+Arrayed::copy(): ArrayedInterface;
+
+Arrayed::collect(...$with): array;
+
+// Other Array_* methods
+
+Arrayed::changeKeyCase(int $case = null): ArrayedInterface;
+
+Arrayed::chunk(int $size, bool $preserve_keys = false): ArrayedInterface;
+
+Arrayed::column($column, $index_key = null): ArrayedInterface;
+
+Arrayed::countValues(): ArrayedInterface;
+
+Arrayed::diffAssoc(array $array2, array ...$_): ArrayedInterface;
+
+Arrayed::diff(array $array2, array ...$_): ArrayedInterface;
+
+Arrayed::reverse(bool $preserve_keys = false): ArrayedInterface;
+
+
 ```
 
 ## Additional Information
