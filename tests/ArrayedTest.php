@@ -352,16 +352,16 @@ class ArrayedTest extends TestCase
 
     public function testCollect()
     {
-       $this->assertIsObject(
-           arrayed(1, 2, 3)
+        $this->assertIsObject(
+            arrayed(1, 2, 3)
             ->collect()
-       );
+        );
 
-       $this->assertEquals(
-           6,
-           arrayed(1, 2, 3)
+        $this->assertEquals(
+            6,
+            arrayed(1, 2, 3)
             ->collect(2, 3, 4)
-           ->count()
-       );
+            ->count()
+        );
     }
 }
