@@ -188,7 +188,7 @@ arrayed(['a', 'b'])
 
 ## APIs
 
-These are the API's available
+These are the API's available:
 
 ```php
 static Arrayed::on(...$values): ArrayedInterface; //new instance of Arrayed
