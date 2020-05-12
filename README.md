@@ -153,6 +153,7 @@ Get the original array data with `raw()` method
 arrayed([1, 2])->raw(); //[1,2]
 ```
 
+#### Piped calls
 As at now not all `array_*` functions have been implemented.
 `pipe()` method helps to call custom function on the array result.
 
