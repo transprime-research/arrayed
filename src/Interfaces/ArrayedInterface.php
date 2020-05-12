@@ -7,6 +7,7 @@ use Countable;
 use ArrayAccess;
 use JsonSerializable;
 use IteratorAggregate;
+use Transprime\Arrayed\Exceptions\ArrayedException;
 
 interface ArrayedInterface extends ArrayAccess, Countable, IteratorAggregate, JsonSerializable
 {
@@ -61,11 +62,15 @@ interface ArrayedInterface extends ArrayAccess, Countable, IteratorAggregate, Js
      */
     public function initial(): array;
 
-    public function __toString(): string;
-
     public function copy(): ArrayedInterface;
 
     public function tap(Closure $closure): ArrayedInterface;
+
+    /**
+     * @param $with
+     * @return \Illuminate\Support\Collection|mixed
+     */
+    public function collect(...$with);
 
 
 

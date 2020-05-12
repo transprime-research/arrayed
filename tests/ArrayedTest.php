@@ -349,4 +349,19 @@ class ArrayedTest extends TestCase
 
         $this->assertEquals($arrayed[0], $res[2]);
     }
+
+    public function testCollect()
+    {
+       $this->assertIsObject(
+           arrayed(1, 2, 3)
+            ->collect()
+       );
+
+       $this->assertEquals(
+           6,
+           arrayed(1, 2, 3)
+            ->collect(2, 3, 4)
+           ->count()
+       );
+    }
 }

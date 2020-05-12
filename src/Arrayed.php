@@ -4,6 +4,7 @@ namespace Transprime\Arrayed;
 
 use Closure;
 use ArrayIterator;
+use Transprime\Arrayed\Exceptions\ArrayedException;
 use Transprime\Arrayed\Types\Undefined;
 use Transprime\Arrayed\Traits\ArrayPrefix;
 use Transprime\Arrayed\Interfaces\ArrayedInterface;
@@ -216,7 +217,7 @@ class Arrayed implements ArrayedInterface
 
     public function copy(): ArrayedInterface
     {
-        return new self($this->result());
+        return new static($this->result());
     }
 
     public function tap(Closure $closure): ArrayedInterface
@@ -224,5 +225,26 @@ class Arrayed implements ArrayedInterface
         function_exists('tap') ? tap($closure, $this->copy()) : $closure($this->copy());
 
         return $this;
+    }
+
+    /**
+     * @param $with
+     * @return mixed
+     * @throws ArrayedException
+     */
+    public function collect(...$with)
+    {
+        $collectionClass = $this->getConfig('collection_class');
+
+        if ($collectionClass && class_exists($collectionClass)) {
+            return new $collectionClass($this->copy()->merge($with)->result());
+        }
+
+        throw new ArrayedException('Collection class is not set or does not exist');
+    }
+
+    private function getConfig($item)
+    {
+        return configured("arrayed.$item", null);
     }
 }
