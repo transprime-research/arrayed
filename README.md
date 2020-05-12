@@ -91,7 +91,7 @@ New: `collect()` method :tada:
 arrayed(1,2)->collect(); // instance of Illuminate/Support/Collection
 arrayed(1,2)->collect(3, 4); //merged with first one to give [1, 2, 3, 4] 
 ```
-> Swap out the default Collection class by editing `config/arrayed.php`'s collection_class value
+> In the future, changing the default Collection class will possible by editing `config/arrayed.php`'s collection_class value
 
 Others:
 
