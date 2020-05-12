@@ -33,11 +33,11 @@ Minimum Requirement
 
 ```php
 arrayed(1, 2, 'ninja')
-    ->filter(fn($val) => is_int($val))
-    ->map(fn($val) => $val + 1)
-    ->flip()
-    ->values()
-    ->sum()(); //use () or ->result() at the end;
+    ->filter(fn($val) => is_int($val)) // [1,2]
+    ->map(fn($val) => $val + 1) // [2, 3]
+    ->flip() // [0, 1]
+    ->values() // [0, 1]
+    ->sum(); // 1
 ```
 
 Instead of:
@@ -134,7 +134,7 @@ arrayed(['a' => 1, 'b' => 2])
     ->sum(); // returns an integer, we cannot chain
 ```
 
-You can still work on the result (if its an array'ed value) by passing a closure/callable function to `result()` method:
+You can work on a result (if its an array'ed value) by passing a closure/callable function to `result()` method:
 
 ```php
 arrayed(['a' => 'name', 'b' => 'age'])
