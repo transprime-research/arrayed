@@ -16,7 +16,7 @@ class ArrayedServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__.'/../../config/migrations-snapshot.php' => config_path('arrayed'),
+            __DIR__ . '/../../config/migrations-snapshot.php' => config_path('arrayed'),
         ], 'arrayed');
 
         $this->app->bind(ArrayedInterface::class, Arrayed::class);
@@ -24,6 +24,6 @@ class ArrayedServiceProvider extends ServiceProvider
 
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__.'/../../config/arrayed.php', 'arrayed');
+        $this->mergeConfigFrom(__DIR__ . '/../../config/arrayed.php', 'arrayed');
     }
 }
