@@ -5,6 +5,14 @@ namespace Transprime\Arrayed\Traits;
 use Transprime\Arrayed\Exceptions\ArrayedException;
 use Transprime\Arrayed\Interfaces\ArrayedInterface;
 
+/**
+ * Trait ArrayPrefix
+ * @package Transprime\Arrayed\Traits
+ *
+ * @method ArrayedInterface combine(array $values)
+ * @method mixed shift()
+ * @method ArrayedInterface slice(int $offset, int $length = null, bool $preserve_keys = false)
+ */
 trait ArrayPrefix
 {
     public function changeKeyCase(int $case = null): ArrayedInterface
