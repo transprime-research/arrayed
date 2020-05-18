@@ -7,7 +7,6 @@ use Countable;
 use ArrayAccess;
 use JsonSerializable;
 use IteratorAggregate;
-use Transprime\Arrayed\Exceptions\ArrayedException;
 
 interface ArrayedInterface extends ArrayAccess, Countable, IteratorAggregate, JsonSerializable
 {
@@ -88,6 +87,9 @@ interface ArrayedInterface extends ArrayAccess, Countable, IteratorAggregate, Js
 
     public function reverse(bool $preserve_keys = false): ArrayedInterface;
 
+    public function diffUassoc(callable $key_compare_func, array $array2, array ...$_): ArrayedInterface;
+
+    public function diffKey(array $array2, array ...$_): ArrayedInterface;
 
     /**
      * Like php array_key_exists, this instead search if (one or more) keys exists in the array

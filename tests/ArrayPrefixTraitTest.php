@@ -17,7 +17,7 @@ class ArrayPrefixTraitTest extends TestCase
     public function testChunk()
     {
         $this->assertEquals(
-            [[1,2], [3,4]],
+            [[1, 2], [3, 4]],
             arrayed(1, 2, 3, 4)->chunk(2)->result()
         );
     }
@@ -74,6 +74,44 @@ class ArrayPrefixTraitTest extends TestCase
         $this->assertEquals(
             ['c' => 'd', 'a' => 'b'],
             arrayed(['a' => 'b', 'c' => 'd'])->reverse()->result()
+        );
+    }
+
+    public function testDiffUassoc()
+    {
+        $first = ['a' => 'b', 'c' => 'd'];
+        $second = ['2' => 'b', 'c' => 'd'];
+        $third = ['2' => 'b', 'k' => 'd'];
+        $callback = function ($first, $second) {
+            return $first === $second;
+        };
+
+        $this->assertEquals(
+            array_diff_uassoc($first, $second, $callback),
+            arrayed($first)->diffUassoc($callback, $second)->result()
+        );
+
+        $this->assertEquals(
+            array_diff_uassoc($first, $second, $third, $callback),
+            arrayed($first)->diffUassoc($callback, $second, $third)->result()
+        );
+    }
+
+    public function testDiffKey()
+    {
+        $first = ['a' => 'b', 'c' => 'd'];
+        $second = ['2' => 'b', 'c' => 'd'];
+        $third = ['2' => 'b', 'k' => 'd', 'm' => 'a'];
+        $fourth = ['m' => 'b', 'h' => 'd', 's' => 'a'];
+
+        $this->assertEquals(
+            array_diff_key($first, $second),
+            arrayed($first)->diffKey($second)->result()
+        );
+
+        $this->assertEquals(
+            array_diff_key($first, $second, $third, $fourth),
+            arrayed($first)->diffKey($second, $third, $fourth)->result()
         );
     }
 

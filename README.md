@@ -261,6 +261,9 @@ Arrayed::diff(array $array2, array ...$_): ArrayedInterface;
 
 Arrayed::reverse(bool $preserve_keys = false): ArrayedInterface;
 
+Arrayed::diffUassoc(callable $key_compare_func, array $array2, array ...$_): ArrayedInterface;
+
+Arrayed::diffKey(array $array2, array ...$_): ArrayedInterface;
 
 ```
 
