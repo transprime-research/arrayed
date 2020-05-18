@@ -19,13 +19,18 @@ class Arrayed implements ArrayedInterface
 
     public function __construct(...$values)
     {
-        if (func_num_args() === 1 && is_array($values[0])) {
-            $this->raw = $values[0];
-        } else {
-            $this->raw = $values;
-        }
+        $this->raw = $this->argumentsToArray(...$values);
 
         $this->setResult(new Undefined());
+    }
+
+    private function argumentsToArray(...$values)
+    {
+        if (func_num_args() === 1 && is_array($values[0])) {
+            return $values[0];
+        }
+
+        return $values;
     }
 
     public static function on(...$values): ArrayedInterface
@@ -237,7 +242,7 @@ class Arrayed implements ArrayedInterface
         $collectionClass = $this->getConfig('collection_class');
 
         if ($collectionClass && class_exists($collectionClass)) {
-            return new $collectionClass($this->copy()->merge($with)->result());
+            return new $collectionClass($this->copy()->merge($this->argumentsToArray(...$with))->result());
         }
 
         throw new ArrayedException('Collection class is not set or does not exist');
