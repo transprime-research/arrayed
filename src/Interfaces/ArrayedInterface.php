@@ -7,9 +7,8 @@ use Countable;
 use ArrayAccess;
 use JsonSerializable;
 use IteratorAggregate;
-use Transprime\Arrayed\Exceptions\ArrayedException;
 
-interface ArrayedInterface extends ArrayAccess, Countable, IteratorAggregate, JsonSerializable
+interface ArrayedInterface extends ArrayPrefixInterface, ArrayAccess, Countable, IteratorAggregate, JsonSerializable
 {
     public static function on(...$values): ArrayedInterface;
 
@@ -87,7 +86,6 @@ interface ArrayedInterface extends ArrayAccess, Countable, IteratorAggregate, Js
     public function diff(array $array2, array ...$_): ArrayedInterface;
 
     public function reverse(bool $preserve_keys = false): ArrayedInterface;
-
 
     /**
      * Like php array_key_exists, this instead search if (one or more) keys exists in the array

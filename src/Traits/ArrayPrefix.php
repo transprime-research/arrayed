@@ -9,9 +9,6 @@ use Transprime\Arrayed\Interfaces\ArrayedInterface;
  * Trait ArrayPrefix
  * @package Transprime\Arrayed\Traits
  *
- * @method ArrayedInterface combine(array $values)
- * @method mixed shift()
- * @method ArrayedInterface slice(int $offset, int $length = null, bool $preserve_keys = false)
  */
 trait ArrayPrefix
 {
