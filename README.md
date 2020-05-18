@@ -18,20 +18,6 @@ Simple PHP Array(ed) in object oriented way wrapping [PHP Arrays](https://www.ph
 
 > Looking for PHP Array on Steroid? See: https://laravel.com/docs/collections
 
-## Installation
-
-```shell script
-composer require transprime-research/arrayed
-```
-
-## Requirement
-Minimum Requirement
-- PHP 7.2 +
-- Composer
-
-- For using `collect()` method, requires `illuminate\support` >= 5.5
-> Additionally on Laravel App, if `arrayed.php`'s config file doesn't get added automatically then run `php artisan vendor:publish --tag=arrayed` after installation.
-
 ## Quick Usage
 
 ```php
@@ -53,6 +39,20 @@ $result = array_values($result);
 $result = array_sum($result);
 ```
 > PS: You can still use the old `function() { return v; }`, `fn()` is the new short arrow function in PHP 7.4+ See: https://www.php.net/manual/en/functions.arrow.php
+
+## Installation
+
+```shell script
+composer require transprime-research/arrayed
+```
+
+## Requirement
+Minimum Requirement
+- PHP 7.2 +
+- Composer
+
+- For using `collect()` method, requires `illuminate\support` >= 5.5
+> Additionally on Laravel App, if `arrayed.php`'s config file doesn't get added automatically then run `php artisan vendor:publish --tag=arrayed` after installation.
 
 ## Other Usages
 
