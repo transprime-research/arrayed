@@ -8,7 +8,7 @@ use ArrayAccess;
 use JsonSerializable;
 use IteratorAggregate;
 
-interface ArrayedInterface extends ArrayPrefixInterface, ArrayAccess, Countable, IteratorAggregate, JsonSerializable
+interface ArrayedInterface extends ArrayAccess, Countable, IteratorAggregate, JsonSerializable
 {
     public static function on(...$values): ArrayedInterface;
 
@@ -86,6 +86,10 @@ interface ArrayedInterface extends ArrayPrefixInterface, ArrayAccess, Countable,
     public function diff(array $array2, array ...$_): ArrayedInterface;
 
     public function reverse(bool $preserve_keys = false): ArrayedInterface;
+
+    public function diffUassoc(callable $key_compare_func, array $array2, array ...$_): ArrayedInterface;
+
+    public function diffKey(array $array2, array ...$_): ArrayedInterface;
 
     /**
      * Like php array_key_exists, this instead search if (one or more) keys exists in the array

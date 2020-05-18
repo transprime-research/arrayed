@@ -9,6 +9,9 @@ use Transprime\Arrayed\Interfaces\ArrayedInterface;
  * Trait ArrayPrefix
  * @package Transprime\Arrayed\Traits
  *
+ * @method self combine(array $values)
+ * @method mixed shift()
+ * @method self slice(int $offset, int $length = null, bool $preserve_keys = false)
  */
 trait ArrayPrefix
 {
@@ -45,6 +48,16 @@ trait ArrayPrefix
     public function reverse(bool $preserve_keys = false): ArrayedInterface
     {
         return $this->setResult(array_reverse($this->getWorkableItem(), $preserve_keys));
+    }
+
+    public function diffUassoc(callable $key_compare_func, array $array2, array ...$_): ArrayedInterface
+    {
+        return $this->setResult(array_diff_uassoc($this->getWorkableItem(), $array2, ...$_, ...[$key_compare_func]));
+    }
+
+    public function diffKey(array $array2, array ...$_): ArrayedInterface
+    {
+        return $this->setResult(array_diff_key($this->getWorkableItem(), $array2, ...$_));
     }
 
     /**
