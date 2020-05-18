@@ -42,5 +42,14 @@
     "psr-4": {
       "Transprime\\Arrayed\\Tests\\": "tests/"
     }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Transprime\\Arrayed\\Providers\\ArrayedServiceProvider"
+      ]
+    }
   }
 }

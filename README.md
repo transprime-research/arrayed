@@ -29,6 +29,9 @@ Minimum Requirement
 - PHP 7.2 +
 - Composer
 
+- For using `collect()` method, requires `illuminate\support` >= 5.5
+> Additionally on Laravel App, if `arrayed.php`'s config file doesn't get added automatically then run `php artisan vendor:publish --tag=arrayed` after installation.
+
 ## Quick Usage
 
 ```php
@@ -261,6 +264,9 @@ Arrayed::diff(array $array2, array ...$_): ArrayedInterface;
 
 Arrayed::reverse(bool $preserve_keys = false): ArrayedInterface;
 
+Arrayed::diffUassoc(callable $key_compare_func, array $array2, array ...$_): ArrayedInterface;
+
+Arrayed::diffKey(array $array2, array ...$_): ArrayedInterface;
 
 ```
 
