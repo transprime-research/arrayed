@@ -184,6 +184,16 @@ arrayed(['a', 'b'])
 
 - Implement other `array_*` methods
 
+- pipe into Collection with `collectPipe`
+
+```php
+use Illuminate\Support\Collection;
+
+arrayed(1,2,3)->collectPipe(function (Collection $collected) {
+    return $collected->take(2)->all();
+})->keys();
+```
+
 > Api implementation to be decided
 
 ## APIs
@@ -269,7 +279,7 @@ Arrayed::diffKey(array $array2, array ...$_): ArrayedInterface;
 
 ## Additional Information
 
-Be aware that this package is part of a series of "The Proof of Concept".
+This package is part of a series of "Code Dare"
 
 See other packages in this series here:
 
