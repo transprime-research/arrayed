@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-<a href="https://travis-ci.com/transprime-research/arrayed"> <img src="https://travis-ci.org/transprime-research/arrayed.svg?branch=master" alt="Build Status"/></a>
+<a href="https://travis-ci.org/transprime-research/arrayed"> <img src="https://travis-ci.org/transprime-research/arrayed.svg?branch=master" alt="Build Status"/></a>
 <a href="https://packagist.org/packages/transprime-research/arrayed"> <img src="https://poser.pugx.org/transprime-research/arrayed/v/stable" alt="Latest Stable Version"/></a>
 <a href="https://packagist.org/packages/transprime-research/arrayed"> <img src="https://poser.pugx.org/transprime-research/arrayed/downloads" alt="Total Downloads"/></a>
 <a href="https://packagist.org/packages/transprime-research/arrayed"> <img src="https://poser.pugx.org/transprime-research/arrayed/v/unstable" alt="Latest Unstable Version"/></a>
