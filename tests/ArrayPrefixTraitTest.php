@@ -22,6 +22,40 @@ class ArrayPrefixTraitTest extends TestCase
         );
     }
 
+    public function testMap()
+    {
+        $array1 = [1, 2];
+        $array2 = ['one', 'two'];
+
+        $this->assertEquals(
+            ['ONE', 'TWO'],
+            arrayed($array2)
+                ->map(function ($value) {
+                    return strtoupper($value);
+                })->result()
+        );
+
+        $this->assertEquals(
+            [
+                [1 => 'one'],
+                [2 => 'two'],
+            ],
+            arrayed($array1)
+                ->map(function ($first, $second) {
+                    return [$first => $second];
+                }, $array2)
+                ->result()
+        );
+
+        $this->assertEquals(
+            [
+                [1, 'one'],
+                [2, 'two'],
+            ],
+            arrayed($array1)->map(null, $array2)->result()
+        );
+    }
+
     public function testColumn()
     {
         $array = [

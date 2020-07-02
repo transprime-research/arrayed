@@ -43,9 +43,9 @@ class Arrayed implements ArrayedInterface
         return $this->result($callable);
     }
 
-    public function map($callback): ArrayedInterface
+    public function map($callback, ...$_): ArrayedInterface
     {
-        return $this->setResult(array_map($callback, $this->getWorkableItem()));
+        return $this->setResult(array_map($callback, $this->getWorkableItem(), ...$_));
     }
 
     public function filter($callback = null, int $flag = 0): ArrayedInterface

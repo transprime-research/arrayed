@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-<a href="https://travis-ci.com/transprime-research/arrayed"> <img src="https://travis-ci.org/transprime-research/arrayed.svg?branch=master" alt="Build Status"/></a>
+<a href="https://travis-ci.org/transprime-research/arrayed"> <img src="https://travis-ci.org/transprime-research/arrayed.svg?branch=master" alt="Build Status"/></a>
 <a href="https://packagist.org/packages/transprime-research/arrayed"> <img src="https://poser.pugx.org/transprime-research/arrayed/v/stable" alt="Latest Stable Version"/></a>
 <a href="https://packagist.org/packages/transprime-research/arrayed"> <img src="https://poser.pugx.org/transprime-research/arrayed/downloads" alt="Total Downloads"/></a>
 <a href="https://packagist.org/packages/transprime-research/arrayed"> <img src="https://poser.pugx.org/transprime-research/arrayed/v/unstable" alt="Latest Unstable Version"/></a>
@@ -187,6 +187,16 @@ arrayed(['a', 'b'])
 
 - Implement other `array_*` methods
 
+- pipe into Collection with `collectPipe`
+
+```php
+use Illuminate\Support\Collection;
+
+arrayed(1,2,3)->collectPipe(function (Collection $collected) {
+    return $collected->take(2)->all();
+})->keys();
+```
+
 > Api implementation to be decided
 
 ## APIs
@@ -272,7 +282,7 @@ Arrayed::diffKey(array $array2, array ...$_): ArrayedInterface;
 
 ## Additional Information
 
-Be aware that this package is part of a series of "The Proof of Concept".
+This package is part of a series of "Code Dare"
 
 See other packages in this series here:
 
