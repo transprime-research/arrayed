@@ -181,14 +181,14 @@ class ArrayPrefixTraitTest extends TestCase
     {
         $data = ['a', 'b', 'c', 'd'];
 
-        $this->assertEquals(
+        $this->assertSame(
             ['a'],
             arrayed($data)->head()->result(),
         );
 
         $data = ['a' => 'b', 'c' => 'd'];
 
-        $this->assertEquals(
+        $this->assertSame(
             ['a' => 'b'],
             arrayed($data)->head()->result(),
         );

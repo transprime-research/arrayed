@@ -80,7 +80,7 @@ trait ArrayPrefix
             : (!$intersect->empty());
     }
 
-    public function head(bool $preserveKeys = true): ArrayedInterface
+    public function head(bool $preserveKeys = false): ArrayedInterface
     {
         return $this->slice(0, 1, $preserveKeys);
     }
