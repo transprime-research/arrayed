@@ -85,6 +85,11 @@ trait ArrayPrefix
         return $this->slice(0, 1, $preserveKeys);
     }
 
+    public function tail(): ArrayedInterface
+    {
+        return $this->slice(1);
+    }
+
     /**
      * Forward the calls to `array_*` that is not yet implemented
      * <br>

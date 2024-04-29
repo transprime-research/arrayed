@@ -193,4 +193,21 @@ class ArrayPrefixTraitTest extends TestCase
             arrayed($data)->head()->result(),
         );
     }
+
+    public function testTail(): void
+    {
+        $data = ['a', 'b', 'c', 'd'];
+
+        $this->assertSame(
+            ['b', 'c', 'd'],
+            arrayed($data)->tail()->result(),
+        );
+
+        $data = ['a' => 'b', 'c' => 'd'];
+
+        $this->assertSame(
+            ['c' => 'd'],
+            arrayed($data)->tail()->result(),
+        );
+    }
 }
