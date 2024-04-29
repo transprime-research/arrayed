@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Transprime\Arrayed;
 
 use Closure;
@@ -13,7 +15,7 @@ class Arrayed implements ArrayedInterface
 {
     use ArrayPrefix;
 
-    private $raw;
+    private array $raw;
 
     private $result;
 
@@ -24,7 +26,7 @@ class Arrayed implements ArrayedInterface
         $this->setResult(new Undefined());
     }
 
-    private function argumentsToArray(...$values)
+    private function argumentsToArray(...$values): array
     {
         if (func_num_args() === 1 && is_array($values[0])) {
             return $values[0];
@@ -186,7 +188,11 @@ class Arrayed implements ArrayedInterface
             return $this->raw;
         }
 
-        return ($asArray && !is_array($this->result)) ? (array)$this->result : $this->result;
+        if ($asArray && !is_array($this->result)) {
+            return (array)$this->result;
+        }
+
+        return $this->result;
     }
 
     private static function makeArrayed($data)

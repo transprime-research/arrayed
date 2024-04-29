@@ -1,9 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Transprime\Arrayed\Traits;
 
 use Transprime\Arrayed\Exceptions\ArrayedException;
 use Transprime\Arrayed\Interfaces\ArrayedInterface;
+use Transprime\Arrayed\Types\Undefined;
 
 /**
  * Trait ArrayPrefix
@@ -11,6 +14,7 @@ use Transprime\Arrayed\Interfaces\ArrayedInterface;
  *
  * @method self combine(array $values)
  * @method mixed shift()
+ * @method mixed pop()
  * @method self slice(int $offset, int $length = null, bool $preserve_keys = false)
  */
 trait ArrayPrefix
@@ -75,6 +79,39 @@ trait ArrayPrefix
         return $all
             ? ($intersect->count() === $size)
             : (!$intersect->empty());
+    }
+
+    /**
+     * @throws ArrayedException
+     * @return ArrayedInterface|mixed
+     */
+    public function head(bool $preserveKeys = false)
+    {
+        return self::makeArrayed(
+            $this->when($this->getWorkableItem())
+                ->slice(0, 1, $preserveKeys)
+                ->values()
+                ->offsetGet(0)
+        );
+    }
+
+    public function tail(): ArrayedInterface
+    {
+        return $this->when($this->getWorkableItem())
+            ->slice(1);
+    }
+
+    private function when($truthyValue, $default = Undefined::class)
+    {
+        if ($truthyValue) {
+            return $this;
+        }
+
+        if ($default === Undefined::class || $default instanceof Undefined) {
+            throw new \InvalidArgumentException('Value cannot be resolved');
+        }
+
+        return $this->setResult($default);
     }
 
     /**

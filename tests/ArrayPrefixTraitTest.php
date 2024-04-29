@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Transprime\Arrayed\Tests;
 
 use PHPUnit\Framework\TestCase;
@@ -159,5 +161,63 @@ class ArrayPrefixTraitTest extends TestCase
             array_combine($keys, $values),
             arrayed($keys)->combine($values)->result()
         );
+
+        // array_pop
+        $data = ['a' => 'b', 'c' => 'd'];
+
+        $this->assertEquals(
+            'd',
+            arrayed($data)->pop(),
+        );
+
+        // array_shift.
+        $this->assertEquals(
+            'b',
+            $arr = arrayed($data)->shift(),
+        );
+    }
+
+    public function testHead(): void
+    {
+        $data = ['a', 'b', 'c', 'd'];
+
+        $this->assertSame(
+            'a',
+            arrayed($data)->head(),
+        );
+
+        $data = ['a' => 'b', 'c' => 'd'];
+
+        $this->assertSame(
+            'b',
+            arrayed($data)->head(),
+        );
+
+        // Test empty.
+        $this->expectException(\InvalidArgumentException::class);
+
+        arrayed([])->head();
+    }
+
+    public function testTail(): void
+    {
+        $data = ['a', 'b', 'c', 'd'];
+
+        $this->assertSame(
+            ['b', 'c', 'd'],
+            arrayed($data)->tail()->result(),
+        );
+
+        $data = ['a' => 'b', 'c' => 'd'];
+
+        $this->assertSame(
+            ['c' => 'd'],
+            arrayed($data)->tail()->result(),
+        );
+
+        // Test empty.
+        $this->expectException(\InvalidArgumentException::class);
+
+        arrayed([])->tail();
     }
 }
