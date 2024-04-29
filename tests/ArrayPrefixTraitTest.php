@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Transprime\Arrayed\Tests;
 
 use PHPUnit\Framework\TestCase;

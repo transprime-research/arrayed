@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Transprime\Arrayed\Tests;
 
 use PHPUnit\Framework\TestCase;
@@ -325,8 +327,8 @@ class ArrayedTest extends TestCase
     {
         $data = ['a' => 1, 'b' => 2];
 
-        $this->assertJson(arrayed($data));
-        $this->assertStringContainsString(arrayed($data), json_encode($data));
+        $this->assertJson((string) arrayed($data));
+        $this->assertStringContainsString((string) arrayed($data), json_encode($data));
         $this->assertEquals(json_encode($data), arrayed($data));
         $this->assertSame(json_encode($data), json_encode(arrayed($data)));
     }

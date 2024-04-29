@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Transprime\Arrayed\Traits;
 
 use Transprime\Arrayed\Exceptions\ArrayedException;
