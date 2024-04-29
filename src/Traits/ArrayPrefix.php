@@ -6,6 +6,7 @@ namespace Transprime\Arrayed\Traits;
 
 use Transprime\Arrayed\Exceptions\ArrayedException;
 use Transprime\Arrayed\Interfaces\ArrayedInterface;
+use Transprime\Arrayed\Types\Undefined;
 
 /**
  * Trait ArrayPrefix
@@ -80,14 +81,36 @@ trait ArrayPrefix
             : (!$intersect->empty());
     }
 
-    public function head(bool $preserveKeys = false): ArrayedInterface
+    /**
+     * @throws ArrayedException
+     * @return ArrayedInterface|mixed
+     */
+    public function head(bool $preserveKeys = false)
     {
-        return $this->slice(0, 1, $preserveKeys);
+        return self::makeArrayed(
+            $this->when($this->getWorkableItem())
+                ->slice(0, 1, $preserveKeys)
+                ->values()
+                ->offsetGet(0)
+        );
     }
 
     public function tail(): ArrayedInterface
     {
         return $this->slice(1);
+    }
+
+    private function when($truthyValue, $default = Undefined::class)
+    {
+        if ($truthyValue) {
+            return $this;
+        }
+
+        if ($default === Undefined::class || $default instanceof Undefined) {
+            throw new \InvalidArgumentException('Value cannot be resolved');
+        }
+
+        return $this->setResult($default);
     }
 
     /**

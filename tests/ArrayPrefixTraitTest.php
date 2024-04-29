@@ -182,16 +182,21 @@ class ArrayPrefixTraitTest extends TestCase
         $data = ['a', 'b', 'c', 'd'];
 
         $this->assertSame(
-            ['a'],
-            arrayed($data)->head()->result(),
+            'a',
+            arrayed($data)->head(),
         );
 
         $data = ['a' => 'b', 'c' => 'd'];
 
         $this->assertSame(
-            ['a' => 'b'],
-            arrayed($data)->head()->result(),
+            'b',
+            arrayed($data)->head(),
         );
+
+        // Test empty.
+        $this->expectException(\InvalidArgumentException::class);
+
+        arrayed([])->head();
     }
 
     public function testTail(): void
