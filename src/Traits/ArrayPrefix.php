@@ -67,7 +67,9 @@ trait ArrayPrefix
     public function walk(callable $callable, $arg = null)
     {
         $workableItem = $this->getWorkableItem();
-        array_walk($workableItem, $callable, $arg);
+        array_walk($workableItem, function (&$value, $key, $arg) use ($callable) {
+            $value = $callable($value, $key, $arg);
+        }, $arg);
 
         return $this->setResult($workableItem);
     }
@@ -76,7 +78,9 @@ trait ArrayPrefix
     public function walkRecursive(callable $callable, $arg = null)
     {
         $workableItem = $this->getWorkableItem();
-        array_walk_recursive($workableItem, $callable, $arg);
+        array_walk_recursive($workableItem, function (&$value, $key, $arg) use ($callable) {
+            $value = $callable($value, $key, $arg);
+        }, $arg);
 
         return $this->setResult($workableItem);
     }

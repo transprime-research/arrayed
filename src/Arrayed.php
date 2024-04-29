@@ -225,8 +225,8 @@ class Arrayed implements ArrayedInterface
     public function toArray(): array
     {
         return $this->walk(
-            function (&$value, $key) {
-                $value = $value instanceof ArrayedInterface ? $value->raw() : $value;
+            function ($value) {
+                return $value instanceof ArrayedInterface ? $value->getWorkableItem() : $value;
             }
         )->result();
     }
