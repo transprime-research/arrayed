@@ -176,4 +176,21 @@ class ArrayPrefixTraitTest extends TestCase
             $arr = arrayed($data)->shift(),
         );
     }
+
+    public function testHead(): void
+    {
+        $data = ['a', 'b', 'c', 'd'];
+
+        $this->assertEquals(
+            ['a'],
+            arrayed($data)->head()->result(),
+        );
+
+        $data = ['a' => 'b', 'c' => 'd'];
+
+        $this->assertEquals(
+            ['a' => 'b'],
+            arrayed($data)->head()->result(),
+        );
+    }
 }

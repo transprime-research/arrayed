@@ -80,6 +80,11 @@ trait ArrayPrefix
             : (!$intersect->empty());
     }
 
+    public function head(bool $preserveKeys = true): ArrayedInterface
+    {
+        return $this->slice(0, 1, $preserveKeys);
+    }
+
     /**
      * Forward the calls to `array_*` that is not yet implemented
      * <br>
