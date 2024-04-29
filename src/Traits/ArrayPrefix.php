@@ -64,6 +64,24 @@ trait ArrayPrefix
         return $this->setResult(array_diff_key($this->getWorkableItem(), $array2, ...$_));
     }
 
+    public function walk(callable $callable, $arg = null)
+    {
+        $workableItem = $this->getWorkableItem();
+        array_walk($workableItem, $callable, $arg);
+
+        return $this->setResult($workableItem);
+    }
+
+
+    public function walkRecursive(callable $callable, $arg = null)
+    {
+        $workableItem = $this->getWorkableItem();
+        array_walk_recursive($workableItem, $callable, $arg);
+
+        return $this->setResult($workableItem);
+    }
+
+
     /**
      * Like php array_key_exists, this instead search if (one or more) keys exists in the array
      *
@@ -82,7 +100,6 @@ trait ArrayPrefix
     }
 
     /**
-     * @throws ArrayedException
      * @return ArrayedInterface|mixed
      */
     public function head(bool $preserveKeys = false)
