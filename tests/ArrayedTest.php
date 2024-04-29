@@ -130,6 +130,15 @@ class ArrayedTest extends TestCase
             arrayed(['a' => 1, 'b' => 2])
                 ->merge(['z' => 26], ['c' => 2])()
         );
+
+        $names = arrayed(['cdd']);
+        $names = arrayed($names)
+            ->merge(['abc']);
+
+        $this->assertEquals(
+            array_merge(['cdd'], ['abc']),
+            $names->toArray(),
+        );
     }
 
     public function testAccessibleArray()

@@ -32,6 +32,10 @@ class Arrayed implements ArrayedInterface
             return $values[0];
         }
 
+        if (func_num_args() === 1 && $values[0] instanceof ArrayedInterface) {
+            return $values[0]->toArray();
+        }
+
         return $values;
     }
 
@@ -216,6 +220,15 @@ class Arrayed implements ArrayedInterface
     public function __toString(): string
     {
         return json_encode($this->getWorkableItem(true));
+    }
+
+    public function toArray(): array
+    {
+        return $this->walkRecursive(
+            function ($value) {
+                return $value instanceof ArrayedInterface ? $value->getWorkableItem() : $value;
+            }
+        )->result();
     }
 
     /**

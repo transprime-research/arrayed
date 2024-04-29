@@ -99,4 +99,6 @@ interface ArrayedInterface extends ArrayAccess, Countable, IteratorAggregate, Js
      * @return bool true if the needle(s) is found else false
      */
     public function keysExists(array $needles, bool $all = true): bool;
+
+    public function toArray(): array;
 }

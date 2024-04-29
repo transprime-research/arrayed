@@ -151,6 +151,33 @@ class ArrayPrefixTraitTest extends TestCase
         );
     }
 
+    public function testWalk(): void
+    {
+        $data = ['a' => 'b', 'c' => 'd'];
+
+        $this->assertEquals(
+            ['a' => 'b-1', 'c' => 'd-1'],
+            arrayed($data)->walk(function ($value, $key) {
+                return $value . '-1';
+            })
+                ->result()
+        );
+    }
+
+    public function testWalkRecursive(): void
+    {
+        $data = ['a' => 'b', 'c' => ['d' => 'e']];
+
+        $this->assertEquals(
+            ['a' => 'b-1', 'c' => ['d' => 'e-1']],
+            arrayed($data)
+                ->walkRecursive(function ($value, $key) {
+                    return $value . '-1';
+                })
+                ->result()
+        );
+    }
+
     public function testUnImplementedArrayPrefixFunction()
     {
         // array_combine
