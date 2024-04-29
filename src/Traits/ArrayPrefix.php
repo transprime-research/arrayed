@@ -13,6 +13,7 @@ use Transprime\Arrayed\Interfaces\ArrayedInterface;
  *
  * @method self combine(array $values)
  * @method mixed shift()
+ * @method mixed pop()
  * @method self slice(int $offset, int $length = null, bool $preserve_keys = false)
  */
 trait ArrayPrefix

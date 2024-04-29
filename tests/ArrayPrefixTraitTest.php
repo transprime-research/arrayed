@@ -161,5 +161,19 @@ class ArrayPrefixTraitTest extends TestCase
             array_combine($keys, $values),
             arrayed($keys)->combine($values)->result()
         );
+
+        // array_pop
+        $data = ['a' => 'b', 'c' => 'd'];
+
+        $this->assertEquals(
+            'd',
+            arrayed($data)->pop(),
+        );
+
+        // array_shift.
+        $this->assertEquals(
+            'b',
+            $arr = arrayed($data)->shift(),
+        );
     }
 }
