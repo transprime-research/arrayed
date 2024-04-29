@@ -97,7 +97,8 @@ trait ArrayPrefix
 
     public function tail(): ArrayedInterface
     {
-        return $this->slice(1);
+        return $this->when($this->getWorkableItem())
+            ->slice(1);
     }
 
     private function when($truthyValue, $default = Undefined::class)

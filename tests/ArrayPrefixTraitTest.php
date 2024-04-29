@@ -214,5 +214,10 @@ class ArrayPrefixTraitTest extends TestCase
             ['c' => 'd'],
             arrayed($data)->tail()->result(),
         );
+
+        // Test empty.
+        $this->expectException(\InvalidArgumentException::class);
+
+        arrayed([])->tail();
     }
 }
