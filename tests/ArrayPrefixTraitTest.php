@@ -289,8 +289,23 @@ class ArrayPrefixTraitTest extends TestCase
         $this->assertEquals(
             2,
             arrayed($data)->search(
-                fn($value, $key) => $value === 'c' && $key = 2,
+                fn($value, $key) => $value === 'c' && $key == 2,
             ),
+        );
+
+        // Ensure initial result is not overwritten.
+        $arrayed = arrayed($data);
+
+        $searchResult = $arrayed->search(fn($value, $key) => $value === 'c' && $key === 2);
+
+        $this->assertEquals(
+            2,
+            $searchResult,
+        );
+
+        $this->assertEquals(
+            ['a', 'b', 'c', 'd'],
+            $arrayed->result(),
         );
     }
 }
