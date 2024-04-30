@@ -88,12 +88,12 @@ trait ArrayPrefix
     public function search($needle, bool $strict = true, $default = null)
     {
         if ($needle instanceof \Closure) {
-            return $this
+            $result = $this
                 ->copy()
                 ->filter(fn($value, $key) => $needle($value, $key))
-                ->keys(false)
-                ->when($this->getWorkableItem(), new self([$default]))
-                ->offsetGet(0);
+                ->keys(false);
+
+            return $result->empty() ? $default : $result->offsetGet(0);
         }
 
 
