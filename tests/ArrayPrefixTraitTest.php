@@ -247,4 +247,26 @@ class ArrayPrefixTraitTest extends TestCase
 
         arrayed([])->tail();
     }
+
+    public function testSearch(): void
+    {
+        $data = ['a', 'b', 'c', 'd'];
+
+        $this->assertSame(
+            1,
+            arrayed($data)->search('b'),
+        );
+
+        // When there is no matching value.
+        $this->assertEquals(
+            null,
+            arrayed($data)->search('z'),
+        );
+
+        // With default value.
+        $this->assertEquals(
+            false,
+            arrayed($data)->search('z', true, false),
+        );
+    }
 }

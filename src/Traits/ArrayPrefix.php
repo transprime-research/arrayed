@@ -85,6 +85,17 @@ trait ArrayPrefix
         return $this->setResult($workableItem);
     }
 
+    public function search($needle, bool $strict = true, $default = null)
+    {
+        $result = array_search($needle, $this->getWorkableItem(), $strict);
+
+        if ($result === false) {
+            return $default;
+        }
+
+        return $result;
+    }
+
 
     /**
      * Like php array_key_exists, this instead search if (one or more) keys exists in the array
