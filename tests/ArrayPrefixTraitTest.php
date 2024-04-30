@@ -284,5 +284,13 @@ class ArrayPrefixTraitTest extends TestCase
                 'no',
             ),
         );
+
+        // With key, value, in callback.
+        $this->assertEquals(
+            2,
+            arrayed($data)->search(
+                fn($value, $key) => $value === 'c' && $key = 2,
+            ),
+        );
     }
 }
