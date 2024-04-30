@@ -14,7 +14,7 @@ interface ArrayedInterface extends ArrayAccess, Countable, IteratorAggregate, Js
 
     public function map($callback): ArrayedInterface;
 
-    public function filter($callback = null, int $flag = 0): ArrayedInterface;
+    public function filter(Closure $callback = null, int $flag = 0): ArrayedInterface;
 
     public function reduce($function, $initial = null): ArrayedInterface;
 

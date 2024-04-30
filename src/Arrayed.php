@@ -54,7 +54,7 @@ class Arrayed implements ArrayedInterface
         return $this->setResult(array_map($callback, $this->getWorkableItem(), ...$_));
     }
 
-    public function filter($callback = null, int $flag = 0): ArrayedInterface
+    public function filter(Closure $callback = null, int $flag = 0): ArrayedInterface
     {
         if ($callback) {
             return $this->setResult(array_filter($this->getWorkableItem(), $callback, $flag));
