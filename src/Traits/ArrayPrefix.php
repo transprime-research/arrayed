@@ -92,7 +92,7 @@ trait ArrayPrefix
                 ->copy()
                 ->filter(fn($value, $key) => $needle($value, $key))
                 ->keys(false)
-                ->when($this->getWorkableItem(), new self([$default]))
+                ->when(empty($this->getWorkableItem()), new self([$default]))
                 ->offsetGet(0);
         }
 
