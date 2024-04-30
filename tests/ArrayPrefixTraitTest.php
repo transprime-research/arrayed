@@ -268,5 +268,21 @@ class ArrayPrefixTraitTest extends TestCase
             false,
             arrayed($data)->search('z', true, false),
         );
+
+        // With callback.
+        $this->assertEquals(
+            1,
+            arrayed($data)->search(fn($value) => $value === 'b'),
+        );
+
+        // Empty with default.
+        $this->assertEquals(
+            'no',
+            arrayed([])->search(
+                fn($value) => $value === 'b',
+                true,
+                'no',
+            ),
+        );
     }
 }
